@@ -86,3 +86,29 @@ print(f"Batch Image Shape: {tuple(batch.image.shape)}")
 print("\n--- Verifying Item Shapes After Loading ---")
 for i, item in enumerate(batch):
     print(f"Item {i}: Image Shape {tuple(item.image.shape)}, Path: {item.image_path}")
+
+    # 1. Denormalize and convert to displayable NumPy array
+    display_image_rgb = denormalize_tensor(item.image)
+
+    # 2. Plot the image on the current subplot axis
+    ax = axes[i]
+    ax.imshow(display_image_rgb)  # Matplotlib expects RGB (which we provide)
+    ax.set_title(f"Item {i}: Label={item.gt_label.item()}", fontsize=8)
+    ax.axis('off')  # Hide axis ticks and labels
+
+# 5c. Hide any unused subplots
+for j in range(BATCH_SIZE, rows * cols):
+    fig.delaxes(axes[j])
+
+# 5d. Final display setup
+fig.suptitle(f"Batch Visualization ({BATCH_SIZE} Images)", fontsize=14)
+plt.tight_layout()  # Adjust subplot params for tight layout
+plt.show()
+
+# print(f"\n--- ImageBatch Loaded from Disk (Size {batch.batch_size}) ---")
+# print(f"Batch Image Shape: {tuple(batch.image.shape)}")
+#
+# # --- 5. Verify by Iterating (Same as previous tutorial) ---
+# print("\n--- Verifying Item Shapes After Loading ---")
+# for i, item in enumerate(batch):
+#     print(f"Item {i}: Image Shape {tuple(item.image.shape)}, Path: {item.image_path}")
