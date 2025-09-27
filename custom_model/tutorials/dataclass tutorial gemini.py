@@ -11,6 +11,24 @@ IMAGE_DIR = Path("./dataset/train/good")
 BATCH_SIZE = 8
 IMAGE_SIZE = 224
 
+
+def denormalize_tensor(tensor):
+    """Denormalizes a single image tensor (C, H, W) and converts it to HWC, uint8 NumPy array."""
+    # Standard ImageNet normalization parameters
+    mean = torch.tensor([0.485, 0.456, 0.406]).view(3, 1, 1)
+    std = torch.tensor([0.229, 0.224, 0.225]).view(3, 1, 1)
+
+    # 1. Denormalize: Reverse the normalization
+    denorm_tensor = tensor * std + mean
+
+    # 2. Convert to NumPy, scale to 0-255, and convert to 8-bit integer
+    image_np = (denorm_tensor.clip(0, 1) * 255).to(torch.uint8).cpu().numpy()
+
+    # 3. Permute dimensions: CHW -> HWC
+    image_np = np.transpose(image_np, (1, 2, 0))  # (H, W, C)
+
+    return image_np
+
 # --- 1. Define Transforms (from previous step) ---
 transform = T_vision.Compose([
     T_vision.ToTensor(),  # Converts HWC uint8 NumPy array -> CHW float32 Tensor [0, 1]
