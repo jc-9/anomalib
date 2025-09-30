@@ -234,7 +234,7 @@ class AnomalibCLI:
         added = parser.add_method_arguments(
             Engine,
             "predict",
-            skip={"model", "dataloaders", "datamodule", "dataset", "data_path"},
+            skip={"model", "dataloaders", "datamodule", "data", "data_path"},
         )
         self.subcommand_method_arguments["predict"] = added
         self.add_arguments_to_parser(parser)

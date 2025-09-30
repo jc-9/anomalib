@@ -64,7 +64,7 @@ class ClipsIndexer(VideoClips, ABC):
     ``_compute_frame_pts``.
 
     Args:
-        video_paths: List of paths to video files in the dataset
+        video_paths: List of paths to video files in the data
         mask_paths: List of paths to mask files corresponding to each video
         clip_length_in_frames: Number of frames in each clip. Defaults to ``2``
         frames_between_clips: Stride between consecutive clips. Defaults to ``1``
@@ -89,7 +89,7 @@ class ClipsIndexer(VideoClips, ABC):
         """Get index of the last frame in a video.
 
         Args:
-            video_idx: Index of the video in the dataset
+            video_idx: Index of the video in the data
 
         Returns:
             Index of the last frame

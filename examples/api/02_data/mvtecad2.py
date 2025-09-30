@@ -1,10 +1,10 @@
 # Copyright (C) 2025 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""Example showing how to use the MVTec AD 2 dataset with Anomalib.
+"""Example showing how to use the MVTec AD 2 data with Anomalib.
 
 This example demonstrates how to:
-1. Load and visualize the MVTec AD 2 dataset
+1. Load and visualize the MVTec AD 2 data
 2. Create a datamodule and use it for training
 3. Access different test sets (public, private, mixed)
 4. Work with custom transforms and visualization
@@ -29,7 +29,7 @@ datamodule = MVTecAD2(
     eval_batch_size=32,
     num_workers=8,
 )
-datamodule.setup()  # This will prepare the dataset
+datamodule.setup()  # This will prepare the data
 
 # Print some information about the splits
 print(f"Number of training samples: {len(datamodule.train_data)}")
@@ -46,7 +46,7 @@ transform = Compose([
     ToDtype(torch.float32, scale=True),
 ])
 
-# Create dataset with custom transform
+# Create data with custom transform
 datamodule = MVTecAD2(
     root="./datasets/MVTec_AD_2",
     category="sheet_metal",

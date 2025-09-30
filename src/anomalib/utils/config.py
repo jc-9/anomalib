@@ -73,8 +73,8 @@ def to_nested_dict(config: dict) -> dict:
 
     Args:
         config: Flattened dictionary where keys can contain dots to indicate nesting
-               levels. For example, ``"dataset.category"`` will become
-               ``{"dataset": {"category": ...}}``.
+               levels. For example, ``"data.category"`` will become
+               ``{"data": {"category": ...}}``.
 
     Returns:
         dict: A nested dictionary where dot-separated keys in the input are converted
@@ -83,14 +83,14 @@ def to_nested_dict(config: dict) -> dict:
 
     Examples:
         >>> config = {
-        ...     "dataset.category": "bottle",
-        ...     "dataset.image_size": 224,
+        ...     "data.category": "bottle",
+        ...     "data.image_size": 224,
         ...     "model_name": "padim"
         ... }
         >>> result = to_nested_dict(config)
-        >>> print(result["dataset"]["category"])
+        >>> print(result["data"]["category"])
         bottle
-        >>> print(result["dataset"]["image_size"])
+        >>> print(result["data"]["image_size"])
         224
         >>> print(result["model_name"])
         padim
@@ -98,7 +98,7 @@ def to_nested_dict(config: dict) -> dict:
     Note:
         - The function preserves the original values while only restructuring the keys
         - Non-dot keys are kept as-is at the root level
-        - Empty key segments (e.g. ``"dataset..name"``) are handled as literal keys
+        - Empty key segments (e.g. ``"data..name"``) are handled as literal keys
     """
     out: dict[str, Any] = {}
     for key, value in config.items():
@@ -128,11 +128,11 @@ def to_yaml(config: Namespace | ListConfig | DictConfig) -> str:
 
     Examples:
         >>> from omegaconf import DictConfig
-        >>> config = DictConfig({"model": "padim", "dataset": {"name": "mvtecad"}})
+        >>> config = DictConfig({"model": "padim", "data": {"name": "mvtecad"}})
         >>> yaml_str = to_yaml(config)
         >>> print(yaml_str)
         model: padim
-        dataset:
+        data:
           name: mvtec
 
     Note:
@@ -221,11 +221,11 @@ def convert_valuesview_to_tuple(values: ValuesView) -> list[tuple]:
         Create parameter combinations from a config:
 
         >>> params = DictConfig({
-        ...     "dataset.category": [
+        ...     "data.category": [
         ...         "bottle",
         ...         "cable",
         ...     ],
-        ...     "dataset.image_size": 224,
+        ...     "data.image_size": 224,
         ...     "model_name": ["padim"],
         ... })
         >>> convert_valuesview_to_tuple(params.values())
@@ -270,7 +270,7 @@ def flatten_dict(config: dict, prefix: str = "") -> dict:
         Basic nested dictionary flattening:
 
         >>> config = {
-        ...     "dataset": {
+        ...     "data": {
         ...         "category": "bottle",
         ...         "image_size": 224
         ...     },
@@ -279,8 +279,8 @@ def flatten_dict(config: dict, prefix: str = "") -> dict:
         >>> flattened = flatten_dict(config)
         >>> print(flattened)  # doctest: +SKIP
         {
-            'dataset.category': 'bottle',
-            'dataset.image_size': 224,
+            'data.category': 'bottle',
+            'data.image_size': 224,
             'model_name': 'padim'
         }
 
@@ -289,8 +289,8 @@ def flatten_dict(config: dict, prefix: str = "") -> dict:
         >>> flattened = flatten_dict(config, prefix="config.")
         >>> print(flattened)  # doctest: +SKIP
         {
-            'config.dataset.category': 'bottle',
-            'config.dataset.image_size': 224,
+            'config.data.category': 'bottle',
+            'config.data.image_size': 224,
             'config.model_name': 'padim'
         }
     """
@@ -322,21 +322,21 @@ def namespace_from_dict(container: dict) -> Namespace:
         Basic dictionary conversion:
 
         >>> container = {
-        ...     "dataset": {
+        ...     "data": {
         ...         "category": "bottle",
         ...         "image_size": 224,
         ...     },
         ...     "model_name": "padim",
         ... }
         >>> namespace = namespace_from_dict(container)
-        >>> namespace.dataset.category
+        >>> namespace.data.category
         'bottle'
         >>> namespace.model_name
         'padim'
 
         The returned object allows attribute-style access:
 
-        >>> namespace.dataset.image_size
+        >>> namespace.data.image_size
         224
 
     Note:

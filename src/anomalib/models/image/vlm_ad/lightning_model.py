@@ -145,7 +145,7 @@ class VlmAd(AnomalibModule):
 
     def _setup(self) -> None:
         if self.k_shot > 0 and self.vlm_backend.num_reference_images != self.k_shot:
-            logger.info("Collecting reference images from training dataset.")
+            logger.info("Collecting reference images from training data.")
             dataloader = self.trainer.datamodule.train_dataloader()
             self.collect_reference_images(dataloader)
 

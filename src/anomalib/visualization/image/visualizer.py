@@ -364,7 +364,7 @@ class ImageVisualizer(Visualizer):
             )
 
             if image is not None:
-                # Get the dataset name and category to save the image
+                # Get the data name and category to save the image
                 datamodule = getattr(trainer, "datamodule", None)
                 dataset_name = getattr(datamodule, "name", None) if datamodule else None
                 category = getattr(datamodule, "category", None) if datamodule else None

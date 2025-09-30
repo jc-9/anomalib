@@ -13,18 +13,18 @@ This module provides functions for splitting datasets in anomaly detection tasks
 These utilities are particularly useful when:
 
 - The test set lacks normal images
-- The dataset needs a validation set
+- The data needs a validation set
 - Class balance needs to be maintained during splits
 
 Example:
     >>> from anomalib.data.utils.split import random_split
-    >>> # Split dataset with 80/20 ratio
-    >>> train_set, val_set = random_split(dataset, split_ratio=0.2)
+    >>> # Split data with 80/20 ratio
+    >>> train_set, val_set = random_split(data, split_ratio=0.2)
     >>> len(train_set), len(val_set)
     (800, 200)
 
     >>> # Label-aware split preserving class distributions
-    >>> splits = random_split(dataset, [0.7, 0.2, 0.1], label_aware=True)
+    >>> splits = random_split(data, [0.7, 0.2, 0.1], label_aware=True)
     >>> len(splits)
     3
 """
@@ -94,13 +94,13 @@ class ValSplitMode(str, Enum):
 def concatenate_datasets(
     datasets: Sequence["data.AnomalibDataset"],
 ) -> "data.AnomalibDataset":
-    """Concatenate multiple datasets into a single dataset.
+    """Concatenate multiple datasets into a single data.
 
     Args:
         datasets: Sequence of at least two datasets to concatenate
 
     Returns:
-        Combined dataset containing samples from all input datasets
+        Combined data containing samples from all input datasets
 
     Example:
         >>> combined = concatenate_datasets([dataset1, dataset2])
@@ -119,24 +119,24 @@ def random_split(
     label_aware: bool = False,
     seed: int | None = None,
 ) -> list["data.AnomalibDataset"]:
-    """Randomly split a dataset into multiple subsets.
+    """Randomly split a data into multiple subsets.
 
     Args:
-        dataset: Source dataset to split
+        dataset: Source data to split
         split_ratio: Split ratios that must sum to 1. If single float ``x`` is
             provided, splits into ``[1-x, x]``
         label_aware: If ``True``, maintains class label distributions in splits
         seed: Random seed for reproducibility
 
     Returns:
-        List of dataset splits based on provided ratios
+        List of data splits based on provided ratios
 
     Example:
-        >>> splits = random_split(dataset, [0.7, 0.3], seed=42)
+        >>> splits = random_split(data, [0.7, 0.3], seed=42)
         >>> len(splits)
         2
         >>> # Label-aware splitting
-        >>> splits = random_split(dataset, 0.2, label_aware=True)
+        >>> splits = random_split(data, 0.2, label_aware=True)
         >>> len(splits)
         2
     """
@@ -188,7 +188,7 @@ def random_split(
 def split_by_label(
     dataset: "data.AnomalibDataset",
 ) -> tuple["data.AnomalibDataset", "data.AnomalibDataset"]:
-    """Split dataset into normal and anomalous subsets.
+    """Split data into normal and anomalous subsets.
 
     Args:
         dataset: Dataset to split by label
@@ -199,8 +199,8 @@ def split_by_label(
             - Dataset with only anomalous samples (label 1)
 
     Example:
-        >>> normal, anomalous = split_by_label(dataset)
-        >>> len(normal) + len(anomalous) == len(dataset)
+        >>> normal, anomalous = split_by_label(data)
+        >>> len(normal) + len(anomalous) == len(data)
         True
     """
     samples = dataset.samples

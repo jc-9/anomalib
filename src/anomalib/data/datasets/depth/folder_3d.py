@@ -3,11 +3,11 @@
 
 """Custom Folder Dataset for 3D anomaly detection.
 
-This module provides a custom dataset class that loads RGB-D data from a folder
-structure. The dataset supports both classification and segmentation tasks.
+This module provides a custom data class that loads RGB-D data from a folder
+structure. The data supports both classification and segmentation tasks.
 
 The folder structure should contain RGB images and their corresponding depth maps.
-The dataset can be configured with separate directories for:
+The data can be configured with separate directories for:
 
 - Normal training samples
 - Normal test samples (optional)
@@ -18,7 +18,7 @@ The dataset can be configured with separate directories for:
 Example:
     >>> from pathlib import Path
     >>> from anomalib.data.datasets import Folder3DDataset
-    >>> dataset = Folder3DDataset(
+    >>> data = Folder3DDataset(
     ...     name="custom",
     ...     root="datasets/custom",
     ...     normal_dir="normal",
@@ -44,9 +44,9 @@ class Folder3DDataset(AnomalibDepthDataset):
     """Dataset class for loading RGB-D data from a custom folder structure.
 
     Args:
-        name (str): Name of the dataset
+        name (str): Name of the data
         normal_dir (str | Path): Path to directory containing normal images
-        root (str | Path | None, optional): Root directory of the dataset.
+        root (str | Path | None, optional): Root directory of the data.
             Defaults to ``None``.
         abnormal_dir (str | Path | None, optional): Path to directory containing
             abnormal images. Defaults to ``None``.
@@ -69,7 +69,7 @@ class Folder3DDataset(AnomalibDepthDataset):
             include. Defaults to ``None``.
 
     Example:
-        >>> dataset = Folder3DDataset(
+        >>> data = Folder3DDataset(
         ...     name="custom",
         ...     root="./datasets/custom",
         ...     normal_dir="train/good",
@@ -124,10 +124,10 @@ class Folder3DDataset(AnomalibDepthDataset):
 
     @property
     def name(self) -> str:
-        """Get dataset name.
+        """Get data name.
 
         Returns:
-            str: Name of the dataset
+            str: Name of the data
         """
         return self._name
 
@@ -144,7 +144,7 @@ def make_folder3d_dataset(
     split: str | Split | None = None,
     extensions: tuple[str, ...] | None = None,
 ) -> DataFrame:
-    """Create a dataset by collecting files from a folder structure.
+    """Create a data by collecting files from a folder structure.
 
     The function creates a DataFrame containing paths to RGB images, depth maps,
     and masks (if available) along with their corresponding labels.
@@ -242,7 +242,7 @@ def make_folder3d_dataset(
             msg = (
                 "Mismatch between anomalous images and depth images. "
                 "Make sure the mask files in 'xyz' folder follow the same naming "
-                "convention as the anomalous images in the dataset"
+                "convention as the anomalous images in the data"
                 "(e.g. image: '000.png', depth: '000.tiff')."
             )
             raise MisMatchError(msg)

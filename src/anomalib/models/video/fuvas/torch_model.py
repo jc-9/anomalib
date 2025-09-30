@@ -106,10 +106,10 @@ class FUVASModel(nn.Module):
         self.feature_extractor = create_feature_extractor(net, return_nodes=[layer])
 
     def fit(self, dataset: torch.Tensor) -> None:
-        """Fit PCA model to dataset.
+        """Fit PCA model to data.
 
         Args:
-            dataset (torch.Tensor): Input dataset with shape
+            dataset (torch.Tensor): Input data with shape
                 ``(n_samples, n_features)``.
         """
         self.pca_model.fit(dataset)

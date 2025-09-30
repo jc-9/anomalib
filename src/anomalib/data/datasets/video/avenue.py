@@ -3,36 +3,36 @@
 
 """CUHK Avenue Dataset.
 
-This module provides PyTorch Dataset implementation for the CUHK Avenue dataset
-for abnormal event detection. The dataset contains surveillance videos with both
+This module provides PyTorch Dataset implementation for the CUHK Avenue data
+for abnormal event detection. The data contains surveillance videos with both
 normal and abnormal events.
 
-If the dataset is not already present on the file system, the DataModule class
-will download and extract the dataset, converting the .mat mask files to .png
+If the data is not already present on the file system, the DataModule class
+will download and extract the data, converting the .mat mask files to .png
 format.
 
 Example:
-    Create a dataset for training:
+    Create a data for training:
 
     >>> from anomalib.data.datasets import AvenueDataset
-    >>> dataset = AvenueDataset(
+    >>> data = AvenueDataset(
     ...     root="./datasets/avenue",
     ...     split="train"
     ... )
-    >>> dataset.setup()
-    >>> dataset[0].keys()
+    >>> data.setup()
+    >>> data[0].keys()
     dict_keys(['image', 'mask', 'video_path', 'frames', 'last_frame',
     'original_image', 'label'])
 
-    Create an image dataset by setting ``clip_length_in_frames=1``:
+    Create an image data by setting ``clip_length_in_frames=1``:
 
-    >>> dataset = AvenueDataset(
+    >>> data = AvenueDataset(
     ...     root="./datasets/avenue",
     ...     split="test",
     ...     clip_length_in_frames=1
     ... )
-    >>> dataset.setup()
-    >>> dataset[0]["image"].shape
+    >>> data.setup()
+    >>> data[0]["image"].shape
     torch.Size([3, 256, 256])
 
 Reference:
@@ -59,12 +59,12 @@ if TYPE_CHECKING:
 
 
 class AvenueDataset(AnomalibVideoDataset):
-    """CUHK Avenue dataset class.
+    """CUHK Avenue data class.
 
     Args:
         split (Split): Dataset split - usually ``Split.TRAIN`` or ``Split.TEST``
         root (Path | str, optional): Path to the root directory containing the
-            dataset. Defaults to ``"./datasets/avenue"``.
+            data. Defaults to ``"./datasets/avenue"``.
         gt_dir (Path | str, optional): Path to the ground truth directory.
             Defaults to ``"./datasets/avenue/ground_truth_demo"``.
         clip_length_in_frames (int, optional): Number of frames in each video
@@ -78,15 +78,15 @@ class AvenueDataset(AnomalibVideoDataset):
             Defaults to ``None``.
 
     Example:
-        Create a dataset for testing:
+        Create a data for testing:
 
-        >>> dataset = AvenueDataset(
+        >>> data = AvenueDataset(
         ...     root="./datasets/avenue",
         ...     split="test",
         ...     transform=transform
         ... )
-        >>> dataset.setup()
-        >>> dataset[0].keys()
+        >>> data.setup()
+        >>> data[0].keys()
         dict_keys(['image', 'mask', 'video_path', 'frames', 'last_frame',
         'original_image', 'label'])
     """
@@ -120,20 +120,20 @@ def make_avenue_dataset(
     gt_dir: Path,
     split: Split | str | None = None,
 ) -> DataFrame:
-    """Create CUHK Avenue dataset by parsing the file structure.
+    """Create CUHK Avenue data by parsing the file structure.
 
     The files are expected to follow the structure:
-        path/to/dataset/[training_videos|testing_videos]/video_filename.avi
+        path/to/data/[training_videos|testing_videos]/video_filename.avi
         path/to/ground_truth/mask_filename.mat
 
     Args:
-        root (Path): Path to dataset root directory
+        root (Path): Path to data root directory
         gt_dir (Path): Path to ground truth directory
         split (Split | str | None, optional): Dataset split (train/test).
             Defaults to ``None``.
 
     Example:
-        Get testing samples from Avenue dataset:
+        Get testing samples from Avenue data:
 
         >>> root = Path("./avenue")
         >>> gt_dir = Path("./avenue/masks")
@@ -175,10 +175,10 @@ def make_avenue_dataset(
 
 
 class AvenueClipsIndexer(ClipsIndexer):
-    """Clips indexer class for Avenue dataset.
+    """Clips indexer class for Avenue data.
 
     This class handles retrieving video clips and corresponding masks from the
-    Avenue dataset.
+    Avenue data.
     """
 
     def get_mask(self, idx: int) -> np.ndarray | None:

@@ -30,11 +30,11 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class DownloadInfo:
-    """Information needed to download a dataset from a URL.
+    """Information needed to download a data from a URL.
 
     Args:
-        name: Name of the dataset
-        url: URL to download the dataset from
+        name: Name of the data
+        url: URL to download the data from
         hashsum: Expected hash value of the downloaded file
         filename: Optional filename to save as. If not provided, extracts from URL
     """
@@ -252,7 +252,7 @@ def check_hash(file_path: Path, expected_hash: str, algorithm: str = "sha256") -
 
 
 def extract(file_name: Path, root: Path) -> None:
-    """Extract a compressed dataset file.
+    """Extract a compressed data file.
 
     Supports .zip, .tar, .gz, .xz and .tgz formats.
 
@@ -263,7 +263,7 @@ def extract(file_name: Path, root: Path) -> None:
     Raises:
         ValueError: If the file format is not recognized
     """
-    logger.info(f"Extracting dataset into {root} folder.")
+    logger.info(f"Extracting data into {root} folder.")
 
     # Safely extract zip files
     if file_name.suffix == ".zip":
@@ -288,11 +288,11 @@ def extract(file_name: Path, root: Path) -> None:
 
 
 def download_and_extract(root: Path, info: DownloadInfo) -> None:
-    """Download and extract a dataset.
+    """Download and extract a data.
 
     Args:
-        root: Root directory where the dataset will be stored
-        info: Download information for the dataset
+        root: Root directory where the data will be stored
+        info: Download information for the data
 
     Raises:
         RuntimeError: If the URL scheme is not http(s)
@@ -303,9 +303,9 @@ def download_and_extract(root: Path, info: DownloadInfo) -> None:
     downloaded_file_path = root / info.filename if info.filename else root / info.url.split("/")[-1]
 
     if downloaded_file_path.exists():
-        logger.info("Existing dataset archive found. Skipping download stage.")
+        logger.info("Existing data archive found. Skipping download stage.")
     else:
-        logger.info("Downloading the %s dataset.", info.name)
+        logger.info("Downloading the %s data.", info.name)
         # audit url. allowing only http:// or https://
         if info.url.startswith("http://") or info.url.startswith("https://"):
             with DownloadProgressBar(unit="B", unit_scale=True, miniters=1, desc=info.name) as progress_bar:
@@ -318,7 +318,7 @@ def download_and_extract(root: Path, info: DownloadInfo) -> None:
             logger.info("Checking the hash of the downloaded file.")
             check_hash(downloaded_file_path, info.hashsum)
         else:
-            msg = f"Invalid URL to download dataset. Supported 'http://' or 'https://' but '{info.url}' is requested"
+            msg = f"Invalid URL to download data. Supported 'http://' or 'https://' but '{info.url}' is requested"
             raise RuntimeError(msg)
 
     extract(downloaded_file_path, root)

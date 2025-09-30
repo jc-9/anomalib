@@ -3,12 +3,12 @@
 
 """MVTec AD 2 Dataset.
 
-This module provides PyTorch Dataset implementation for the MVTec AD 2 dataset.
-The dataset contains 8 categories of industrial objects with both normal and
+This module provides PyTorch Dataset implementation for the MVTec AD 2 data.
+The data contains 8 categories of industrial objects with both normal and
 anomalous samples. Each category includes RGB images and pixel-level ground truth
 masks for anomaly segmentation.
 
-The dataset provides three different test sets:
+The data provides three different test sets:
     - Public test set (test_public/): Contains both normal and anomalous samples with ground truth masks
     - Private test set (test_private/): Contains unseen test samples without ground truth
     - Private mixed test set (test_private_mixed/): Contains unseen test samples
@@ -18,7 +18,7 @@ The public test set is used for standard evaluation, while the private test sets
 are used for real-world evaluation scenarios where ground truth is not available.
 
 License:
-    MVTec AD 2 dataset is released under the Creative Commons
+    MVTec AD 2 data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0) https://creativecommons.org/licenses/by-nc-sa/4.0/
 
@@ -43,7 +43,7 @@ from anomalib.data.utils import Split, validate_path
 class TestType(str, Enum):
     """Type of test set to use.
 
-    The MVTec AD 2 dataset provides three different test sets:
+    The MVTec AD 2 data provides three different test sets:
         - PUBLIC: Test set with ground truth masks for facilitating local testing and initial performance estimation
         - PRIVATE: Official unseen test set without ground truth for entering the leaderboard
         - PRIVATE_MIXED: Official unseen test set captured under seen and unseen lighting conditions (mixed randomly)
@@ -70,10 +70,10 @@ CATEGORIES = (
 
 
 class MVTecAD2Dataset(AnomalibDataset):
-    """MVTec AD 2 dataset class.
+    """MVTec AD 2 data class.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/MVTec_AD_2"``.
         category (str): Category name, e.g. ``"sheet_metal"``.
             Defaults to ``"sheet_metal"``.
@@ -88,16 +88,16 @@ class MVTecAD2Dataset(AnomalibDataset):
             Defaults to ``TestType.PUBLIC``.
 
     Example:
-        Create training dataset::
+        Create training data::
 
             >>> from pathlib import Path
-            >>> dataset = MVTecAD2Dataset(
+            >>> data = MVTecAD2Dataset(
             ...     root=Path("./datasets/MVTec_AD_2"),
             ...     category="sheet_metal",
             ...     split="train"
             ... )
 
-        Create validation dataset::
+        Create validation data::
 
             >>> val_dataset = MVTecAD2Dataset(
             ...     root=Path("./datasets/MVTec_AD_2"),
@@ -182,7 +182,7 @@ def make_mvtec2_dataset(
             └── good/
 
     Args:
-        root (str | Path): Path to the dataset root directory
+        root (str | Path): Path to the data root directory
         split (str | Split | None, optional): Dataset split (train, val, test). Defaults to None.
         test_type (TestType, optional): Type of test set to use for testing:
             - PUBLIC: Test set with ground truth (for local evaluation)
@@ -193,7 +193,7 @@ def make_mvtec2_dataset(
 
     Returns:
         DataFrame: Dataset samples with columns:
-            - path: Base path to dataset
+            - path: Base path to data
             - split: Dataset split (train/test)
             - label: Class label
             - image_path: Path to image file

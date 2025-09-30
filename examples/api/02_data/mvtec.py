@@ -1,9 +1,9 @@
 # Copyright (C) 2024 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""Example showing how to use the MVTecAD dataset with Anomalib.
+"""Example showing how to use the MVTecAD data with Anomalib.
 
-MVTecAD is a widely-used dataset for anomaly detection, containing multiple
+MVTecAD is a widely-used data for anomaly detection, containing multiple
 categories of industrial objects with various types of defects.
 """
 

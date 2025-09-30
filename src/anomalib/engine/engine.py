@@ -239,7 +239,7 @@ class Engine:
         """Setup the workspace for the model.
 
         This method sets up the default root directory for the model based on
-        the model name, dataset name, and category. Model checkpoints, logs, and
+        the model name, data name, and category. Model checkpoints, logs, and
         other artifacts will be saved in this directory.
 
         Args:
@@ -252,7 +252,7 @@ class Engine:
                 Defaults to ``None``.
             datamodule (AnomalibDataModule | None, optional): Lightning datamodule.
                 Defaults to ``None``.
-            dataset (AnomalibDataset | None, optional): Anomalib dataset.
+            dataset (AnomalibDataset | None, optional): Anomalib data.
                 Defaults to ``None``.
             versioned_dir (bool, optional): Whether to create a versioned directory.
                 Defaults to ``True``.
@@ -261,11 +261,11 @@ class Engine:
             TypeError: If the dataloader type is unknown.
         """
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-        # 1. Get the dataset name and category from the dataloaders, datamodule, or dataset.
+        # 1. Get the data name and category from the dataloaders, datamodule, or data.
         dataset_name: str = ""
         category: str | None = None
 
-        # Check datamodule and dataset directly
+        # Check datamodule and data directly
         if datamodule is not None:
             dataset_name = datamodule.name
             category = datamodule.category
@@ -381,7 +381,7 @@ class Engine:
                 Defaults to None.
 
         CLI Usage:
-            1. you can pick a model, and you can run through the MVTec dataset.
+            1. you can pick a model, and you can run through the MVTec data.
                 ```python
                 anomalib fit --model anomalib.models.Padim
                 ```
@@ -577,7 +577,7 @@ class Engine:
             datamodule (AnomalibDataModule | None, optional):
                 A :class:`~lightning.pytorch.core.datamodule.AnomalibDataModule` that defines
                 the :class:`~lightning.pytorch.core.hooks.DataHooks.predict_dataloader` hook.
-                The datamodule can also be a dataset that will be wrapped in a torch Dataloader.
+                The datamodule can also be a data that will be wrapped in a torch Dataloader.
                 Defaults to None.
             dataset (Dataset | PredictDataset | None, optional):
                 A :class:`~torch.utils.data.Dataset` or :class:`~anomalib.data.PredictDataset` that will be used
@@ -615,7 +615,7 @@ class Engine:
                 ```python
                 anomalib predict --config <config_file_path> --return_predictions
                 ```
-            5. You can also point to a folder with image or a single image instead of passing a dataset.
+            5. You can also point to a folder with image or a single image instead of passing a data.
                 ```python
                 anomalib predict --model Padim --data <PATH_TO_IMAGE_OR_FOLDER> --ckpt_path <PATH_TO_CHECKPOINT>
                 ```
@@ -688,7 +688,7 @@ class Engine:
                 Defaults to None.
 
         CLI Usage:
-            1. you can pick a model, and you can run through the MVTec dataset.
+            1. you can pick a model, and you can run through the MVTec data.
                 ```python
                 anomalib train --model anomalib.models.Padim --data MVTec
                 ```

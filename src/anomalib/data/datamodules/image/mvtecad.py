@@ -3,8 +3,8 @@
 
 """MVTec AD Data Module.
 
-This module provides a PyTorch Lightning DataModule for the MVTec AD dataset. If
-the dataset is not available locally, it will be downloaded and extracted
+This module provides a PyTorch Lightning DataModule for the MVTec AD data. If
+the data is not available locally, it will be downloaded and extracted
 automatically.
 
 Example:
@@ -17,7 +17,7 @@ Example:
         ... )
 
 Notes:
-    The dataset will be automatically downloaded and converted to the required
+    The data will be automatically downloaded and converted to the required
     format when first used. The directory structure after preparation will be::
 
         datasets/
@@ -27,7 +27,7 @@ Notes:
             └── ...
 
 License:
-    MVTec AD dataset is released under the Creative Commons
+    MVTec AD data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0).
     https://creativecommons.org/licenses/by-nc-sa/4.0/
@@ -70,9 +70,9 @@ class MVTecAD(AnomalibDataModule):
     """MVTec AD Datamodule.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/MVTecAD"``.
-        category (str): Category of the MVTec AD dataset (e.g. ``"bottle"`` or
+        category (str): Category of the MVTec AD data (e.g. ``"bottle"`` or
             ``"cable"``). Defaults to ``"bottle"``.
         train_batch_size (int, optional): Training batch size.
             Defaults to ``32``.
@@ -190,14 +190,14 @@ class MVTecAD(AnomalibDataModule):
         )
 
     def prepare_data(self) -> None:
-        """Download the dataset if not available.
+        """Download the data if not available.
 
-        This method checks if the specified dataset is available in the file
-        system. If not, it downloads and extracts the dataset into the
+        This method checks if the specified data is available in the file
+        system. If not, it downloads and extracts the data into the
         appropriate directory.
 
         Example:
-            Assume the dataset is not available on the file system::
+            Assume the data is not available on the file system::
 
                 >>> datamodule = MVTecAD(
                 ...     root="./datasets/MVTecAD",
@@ -214,7 +214,7 @@ class MVTecAD(AnomalibDataModule):
                     └── ...
         """
         if (self.root / self.category).is_dir():
-            logger.info("Found the dataset.")
+            logger.info("Found the data.")
         else:
             download_and_extract(self.root, DOWNLOAD_INFO)
 

@@ -36,9 +36,9 @@ class Tabular(AnomalibDataModule):
     """Tabular DataModule.
 
     Args:
-        name (str): Name of the dataset. Used for logging/saving.
+        name (str): Name of the data. Used for logging/saving.
         samples (dict | list | DataFrame): Pandas ``DataFrame`` or compatible ``list``
-            or ``dict`` containing the dataset information.
+            or ``dict`` containing the data information.
         root (str | Path | None): Root folder containing normal and abnormal
             directories. Defaults to ``None``.
         normal_split_ratio (float): Ratio to split normal training images for
@@ -175,7 +175,7 @@ class Tabular(AnomalibDataModule):
         """Create Tabular Datamodule from file.
 
         Args:
-            name (str): Name of the dataset. This is used to name the datamodule,
+            name (str): Name of the data. This is used to name the datamodule,
                 especially when logging/saving.
             file_path (str | Path): Path to tabular file containing the datset
                 information.
@@ -232,7 +232,7 @@ class Tabular(AnomalibDataModule):
             msg = f"Unsupported file format: '{file_format}'"
             raise ValueError(msg)
 
-        # Read the file and return Tabular dataset
+        # Read the file and return Tabular data
         pd_kwargs = pd_kwargs or {}
         samples = read_func(file_path, **pd_kwargs)
         return cls(name, samples, **kwargs)

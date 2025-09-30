@@ -134,9 +134,9 @@ def collect_anomaly_scores(
                            an anomaly.
 
     Returns:
-        ground_truth_components: A list of all ground truth connected components that appear in the dataset.
+        ground_truth_components: A list of all ground truth connected components that appear in the data.
             For each component, a sorted list of its anomaly scores is stored.
-        anomaly_scores_ok_pixels: A sorted list of anomaly scores of all anomaly-free pixels of the dataset.
+        anomaly_scores_ok_pixels: A sorted list of anomaly scores of all anomaly-free pixels of the data.
             This list can be used to quickly select thresholds that fix a certain false positive rate.
     """
     # Make sure an anomaly map is present for each ground truth map.
@@ -230,7 +230,7 @@ def calculate_au_pro(
     """Compute the area under the PRO curve for a set of ground truth images and corresponding anomaly images.
 
     Args:
-        gts:         List of tensors that contain the ground truth images for a single dataset object.
+        gts:         List of tensors that contain the ground truth images for a single data object.
         predictions: List of tensors containing anomaly images for each ground truth image.
         integration_limit:    Integration limit to use when computing the area under the PRO curve.
         num_thresholds:       Number of thresholds to use to sample the area under the PRO curve.

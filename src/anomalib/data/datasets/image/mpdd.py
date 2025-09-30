@@ -3,13 +3,13 @@
 
 """MPDD Dataset.
 
-This module provides PyTorch Dataset implementation for the MPDD dataset.
-The dataset contains 6 categories of industrial objects with both normal and
+This module provides PyTorch Dataset implementation for the MPDD data.
+The data contains 6 categories of industrial objects with both normal and
 anomalous samples. Each category includes RGB images and pixel-level ground truth
 masks for anomaly segmentation.
 
 License:
-    MPDD dataset is released under the Creative Commons
+    MPDD data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0) https://creativecommons.org/licenses/by-nc-sa/4.0/
 
@@ -43,13 +43,13 @@ CATEGORIES = (
 
 
 class MPDDDataset(AnomalibDataset):
-    """MPDD dataset class.
+    """MPDD data class.
 
-    Dataset class for loading and processing MPDD dataset images. Supports
+    Dataset class for loading and processing MPDD data images. Supports
     both classification and segmentation tasks.
 
     Args:
-        root (Path | str): Path to root directory containing the dataset.
+        root (Path | str): Path to root directory containing the data.
             Defaults to ``"./datasets/MPDD"``.
         category (str): Category name, must be one of ``CATEGORIES``.
             Defaults to ``"bracket_black"``.
@@ -61,7 +61,7 @@ class MPDDDataset(AnomalibDataset):
     Example:
         >>> from pathlib import Path
         >>> from anomalib.data.datasets import MPDDDataset
-        >>> dataset = MPDDDataset(
+        >>> data = MPDDDataset(
         ...     root=Path("./datasets/MPDD"),
         ...     category="bracket_black",
         ...     split="train"
@@ -69,14 +69,14 @@ class MPDDDataset(AnomalibDataset):
 
         For classification tasks, each sample contains:
 
-        >>> sample = dataset[0]
+        >>> sample = data[0]
         >>> list(sample.keys())
         ['image_path', 'label', 'image']
 
         For segmentation tasks, samples also include mask paths and masks:
 
-        >>> dataset.task = "segmentation"
-        >>> sample = dataset[0]
+        >>> data.task = "segmentation"
+        >>> sample = data[0]
         >>> list(sample.keys())
         ['image_path', 'label', 'image', 'mask_path', 'mask']
 
@@ -114,11 +114,11 @@ def make_mpdd_dataset(
     """Create MPDD samples by parsing the data directory structure.
 
     The files are expected to follow the structure:
-        ``path/to/dataset/split/category/image_filename.png``
-        ``path/to/dataset/ground_truth/category/mask_filename.png``
+        ``path/to/data/split/category/image_filename.png``
+        ``path/to/data/ground_truth/category/mask_filename.png``
 
     Args:
-        root (Path | str): Path to dataset root directory
+        root (Path | str): Path to data root directory
         split (str | Split | None, optional): Dataset split (train or test)
             Defaults to ``None``.
         extensions (Sequence[str] | None, optional): Valid file extensions
@@ -126,7 +126,7 @@ def make_mpdd_dataset(
 
     Returns:
         DataFrame: Dataset samples with columns:
-            - path: Base path to dataset
+            - path: Base path to data
             - split: Dataset split (train/test)
             - label: Class label
             - image_path: Path to image file

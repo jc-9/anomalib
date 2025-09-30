@@ -5,7 +5,7 @@
 
 # Using Custom Folder Dataset with Anomalib CLI
 # ------------------------------------------
-# This example shows how to use your own dataset organized in folders.
+# This example shows how to use your own data organized in folders.
 
 # 1. Basic Usage with Default Structure
 # Train using the default folder structure

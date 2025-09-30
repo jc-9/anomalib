@@ -4,7 +4,7 @@
 """Visual Anomaly (VisA) Data Module.
 
 This module provides a PyTorch Lightning DataModule for the Visual Anomaly (VisA)
-dataset. If the dataset is not available locally, it will be downloaded and
+data. If the data is not available locally, it will be downloaded and
 extracted automatically.
 
 Example:
@@ -17,7 +17,7 @@ Example:
         ... )
 
 Notes:
-    The dataset will be automatically downloaded and converted to the required
+    The data will be automatically downloaded and converted to the required
     format when first used. The directory structure after preparation will be::
 
         datasets/
@@ -29,7 +29,7 @@ Notes:
             └── VisA_20220922.tar
 
 License:
-    The VisA dataset is released under the Creative Commons
+    The VisA data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0).
     https://creativecommons.org/licenses/by-nc-sa/4.0/
@@ -69,9 +69,9 @@ class Visa(AnomalibDataModule):
     """VisA Datamodule.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/visa"``.
-        category (str): Category of the VisA dataset (e.g. ``"candle"``).
+        category (str): Category of the VisA data (e.g. ``"candle"``).
             Defaults to ``"capsules"``.
         train_batch_size (int, optional): Training batch size.
             Defaults to ``32``.
@@ -148,16 +148,16 @@ class Visa(AnomalibDataModule):
         )
 
     def prepare_data(self) -> None:
-        """Download and prepare the dataset if not available.
+        """Download and prepare the data if not available.
 
-        This method checks if the dataset exists and is properly formatted.
+        This method checks if the data exists and is properly formatted.
         If not, it downloads and prepares the data in the following steps:
 
-        1. If the processed dataset exists (``visa_pytorch/{category}``), do
+        1. If the processed data exists (``visa_pytorch/{category}``), do
            nothing
-        2. If the raw dataset exists but isn't processed, apply the train/test
+        2. If the raw data exists but isn't processed, apply the train/test
            split
-        3. If the dataset doesn't exist, download, extract, and process it
+        3. If the data doesn't exist, download, extract, and process it
 
         The final directory structure will be::
 
@@ -176,16 +176,16 @@ class Visa(AnomalibDataModule):
                 └── VisA_20220922.tar
         """
         if (self.split_root / self.category).is_dir():
-            # dataset is available, and split has been applied
-            logger.info("Found the dataset and train/test split.")
+            # data is available, and split has been applied
+            logger.info("Found the data and train/test split.")
         elif (self.root / self.category).is_dir():
-            # dataset is available, but split has not yet been applied
-            logger.info("Found the dataset. Applying train/test split.")
+            # data is available, but split has not yet been applied
+            logger.info("Found the data. Applying train/test split.")
             self.apply_cls1_split()
         else:
-            # dataset is not available
+            # data is not available
             download_and_extract(self.root, DOWNLOAD_INFO)
-            logger.info("Downloaded the dataset. Applying train/test split.")
+            logger.info("Downloaded the data. Applying train/test split.")
             self.apply_cls1_split()
 
     def apply_cls1_split(self) -> None:

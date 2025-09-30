@@ -25,10 +25,10 @@ from anomalib.pipelines.tiled_ensemble.components.utils.prediction_merging impor
 
 @pytest.fixture(scope="module")
 def get_ensemble_config(dataset_path: Path) -> dict:
-    """Return ensemble dummy config dict with corrected dataset path to dummy temp dir."""
+    """Return ensemble dummy config dict with corrected data path to dummy temp dir."""
     with Path("tests/unit/pipelines/tiled_ensemble/dummy_config.yaml").open(encoding="utf-8") as file:
         config = yaml.safe_load(file)
-        # dummy dataset
+        # dummy data
         config["data"]["init_args"]["root"] = dataset_path / "mvtecad"
 
         return config

@@ -1,9 +1,9 @@
 # Copyright (C) 2025 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""Example showing how to use the MVTec LOCO dataset with Anomalib.
+"""Example showing how to use the MVTec LOCO data with Anomalib.
 
-MVTec LOCO is a dataset for detecting logical and structural anomalies in images.
+MVTec LOCO is a data for detecting logical and structural anomalies in images.
 It contains 5 categories of industrial objects with various types of defects.
 """
 
@@ -42,13 +42,13 @@ for category in ["breakfast_box", "juice_bottle", "pushpins"]:
     # Use category_data with your model...
 
 # 4. Accessing Dataset Properties
-# Get information about the dataset
+# Get information about the data
 print(f"Number of training samples: {len(datamodule.train_data)}")
 print(f"Number of validation samples: {len(datamodule.val_data)}")
 print(f"Number of test samples: {len(datamodule.test_data)}")
 
 # 5. Working with Data Samples
-# Get a sample from the dataset
+# Get a sample from the data
 sample = datamodule.train_data[0]
 print("\nSample keys:", list(sample.__dict__.keys()))
 print("Image shape:", sample.image.shape if sample.image is not None else None)

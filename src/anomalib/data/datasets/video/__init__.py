@@ -3,16 +3,16 @@
 
 """PyTorch Dataset implementations for anomaly detection in videos.
 
-This module provides dataset implementations for various video anomaly detection
+This module provides data implementations for various video anomaly detection
 datasets:
 
-- ``AvenueDataset``: CUHK Avenue dataset for abnormal event detection
-- ``ShanghaiTechDataset``: ShanghaiTech Campus surveillance dataset
-- ``UCSDpedDataset``: UCSD Pedestrian dataset for anomaly detection
+- ``AvenueDataset``: CUHK Avenue data for abnormal event detection
+- ``ShanghaiTechDataset``: ShanghaiTech Campus surveillance data
+- ``UCSDpedDataset``: UCSD Pedestrian data for anomaly detection
 
 Example:
     >>> from anomalib.data.datasets import AvenueDataset
-    >>> dataset = AvenueDataset(
+    >>> data = AvenueDataset(
     ...     root="./datasets/avenue",
     ...     split="train"
     ... )

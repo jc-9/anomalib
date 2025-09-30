@@ -51,7 +51,7 @@ def infer(args: Namespace) -> None:
     )
     model = get_model(args.model)
 
-    # create the dataset
+    # create the data
     dataset = PredictDataset(**args.data)
     dataloader = DataLoader(dataset, collate_fn=dataset.collate_fn, pin_memory=True)
 

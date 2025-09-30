@@ -154,7 +154,7 @@ class Fuvas(MemoryBankMixin, AnomalibModule):
         logger.info("Aggregating the embedding extracted from the training set.")
         embeddings = torch.vstack(self.embeddings)
 
-        logger.info("Fitting a PCA to dataset.")
+        logger.info("Fitting a PCA to data.")
         self.model.fit(embeddings)
 
     def validation_step(self, batch: Batch, *args, **kwargs) -> STEP_OUTPUT:

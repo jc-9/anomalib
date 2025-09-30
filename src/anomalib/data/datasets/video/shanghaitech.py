@@ -4,14 +4,14 @@
 """ShanghaiTech Campus Dataset.
 
 This module provides PyTorch Dataset implementation for the ShanghaiTech Campus
-dataset for abnormal event detection. The dataset contains surveillance videos
+data for abnormal event detection. The data contains surveillance videos
 with both normal and abnormal events.
 
-If the dataset is not already present on the file system, the DataModule class
-will download and extract the dataset, converting the video files to a format
+If the data is not already present on the file system, the DataModule class
+will download and extract the data, converting the video files to a format
 readable by pyav.
 
-The dataset expects the following directory structure::
+The data expects the following directory structure::
 
     root/
     ├── training/
@@ -30,26 +30,26 @@ The dataset expects the following directory structure::
             └── ...
 
 Example:
-    Create a dataset for training:
+    Create a data for training:
 
     >>> from anomalib.data.datasets import ShanghaiTechDataset
     >>> from anomalib.data.utils import Split
-    >>> dataset = ShanghaiTechDataset(
+    >>> data = ShanghaiTechDataset(
     ...     root="./datasets/shanghaitech",
     ...     scene=1,
     ...     split=Split.TRAIN
     ... )
-    >>> dataset[0].keys()
+    >>> data[0].keys()
     dict_keys(['image', 'video_path', 'frames', 'last_frame', 'original_image'])
 
-    Create a test dataset:
+    Create a test data:
 
-    >>> dataset = ShanghaiTechDataset(
+    >>> data = ShanghaiTechDataset(
     ...     root="./datasets/shanghaitech",
     ...     scene=1,
     ...     split=Split.TEST
     ... )
-    >>> dataset[0].keys()
+    >>> data[0].keys()
     dict_keys(['image', 'mask', 'video_path', 'frames', 'last_frame',
     'original_image', 'label'])
 
@@ -81,9 +81,9 @@ class ShanghaiTechDataset(AnomalibVideoDataset):
 
     Args:
         split (Split): Dataset split - either ``Split.TRAIN`` or ``Split.TEST``
-        root (Path | str): Path to the root directory containing the dataset.
+        root (Path | str): Path to the root directory containing the data.
             Defaults to ``"./datasets/shanghaitech"``.
-        scene (int): Index of the dataset scene (category) in range [1, 13].
+        scene (int): Index of the data scene (category) in range [1, 13].
             Defaults to ``1``.
         clip_length_in_frames (int, optional): Number of frames in each video
             clip. Defaults to ``2``.
@@ -97,7 +97,7 @@ class ShanghaiTechDataset(AnomalibVideoDataset):
     Example:
         >>> from anomalib.data.datasets import ShanghaiTechDataset
         >>> from anomalib.data.utils import Split
-        >>> dataset = ShanghaiTechDataset(
+        >>> data = ShanghaiTechDataset(
         ...     root="./datasets/shanghaitech",
         ...     scene=1,
         ...     split=Split.TRAIN
@@ -129,7 +129,7 @@ class ShanghaiTechDataset(AnomalibVideoDataset):
 
 
 class ShanghaiTechTrainClipsIndexer(ClipsIndexer):
-    """Clips indexer for ShanghaiTech training dataset.
+    """Clips indexer for ShanghaiTech training data.
 
     The train and test subsets use different file formats, so separate clips
     indexer implementations are needed.
@@ -150,7 +150,7 @@ class ShanghaiTechTrainClipsIndexer(ClipsIndexer):
 
 
 class ShanghaiTechTestClipsIndexer(ClipsIndexer):
-    """Clips indexer for ShanghaiTech test dataset.
+    """Clips indexer for ShanghaiTech test data.
 
     The train and test subsets use different file formats, so separate clips
     indexer implementations are needed.
@@ -216,7 +216,7 @@ class ShanghaiTechTestClipsIndexer(ClipsIndexer):
 
 
 def make_shanghaitech_dataset(root: Path, scene: int, split: Split | str | None = None) -> DataFrame:
-    """Create ShanghaiTech dataset by parsing the file structure.
+    """Create ShanghaiTech data by parsing the file structure.
 
     The files are expected to follow the structure::
 
@@ -236,8 +236,8 @@ def make_shanghaitech_dataset(root: Path, scene: int, split: Split | str | None 
                 └── ...
 
     Args:
-        root (Path): Path to dataset root directory.
-        scene (int): Index of the dataset scene (category) in range [1, 13].
+        root (Path): Path to data root directory.
+        scene (int): Index of the data scene (category) in range [1, 13].
         split (Split | str | None, optional): Dataset split (train or test).
             Defaults to ``None``.
 

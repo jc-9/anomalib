@@ -151,7 +151,7 @@ class WinClip(AnomalibModule):
                 )
                 dataloader = DataLoader(reference_dataset, batch_size=1, shuffle=False, pin_memory=True)
             else:
-                logger.info("Collecting reference images from training dataset")
+                logger.info("Collecting reference images from training data")
                 dataloader = self.trainer.datamodule.train_dataloader()
 
             ref_images = self.collect_reference_images(dataloader)
@@ -183,7 +183,7 @@ class WinClip(AnomalibModule):
     def collect_reference_images(self, dataloader: DataLoader) -> torch.Tensor:
         """Collect reference images for few-shot inference.
 
-        Iterates through the training dataset until the required number of reference images
+        Iterates through the training data until the required number of reference images
         (specified by ``k_shot``) are collected.
 
         Args:

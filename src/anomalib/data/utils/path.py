@@ -130,7 +130,7 @@ def resolve_path(folder: str | Path, root: str | Path | None = None) -> Path:
 
     Args:
         folder: Folder location containing image or mask data
-        root: Optional root directory for the dataset
+        root: Optional root directory for the data
 
     Returns:
         Absolute path combining root and folder
@@ -267,7 +267,7 @@ def validate_and_resolve_path(
 
     Args:
         folder: Folder location containing image or mask data
-        root: Root directory for the dataset
+        root: Root directory for the data
         base_dir: Base directory to restrict file access
 
     Returns:

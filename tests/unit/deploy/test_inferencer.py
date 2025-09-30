@@ -19,13 +19,13 @@ from anomalib.models import Padim
 
 
 class _MockImageLoader:
-    """Create mock images for inference on CPU based on the specifics of the original torch test dataset.
+    """Create mock images for inference on CPU based on the specifics of the original torch test data.
 
     Uses yield so as to avoid storing everything in the memory.
 
     Args:
         image_size (list[int]): Size of input image
-        total_count (int): Total images in the test dataset
+        total_count (int): Total images in the test data
     """
 
     def __init__(self, image_size: list[int], total_count: int, as_numpy: bool = False) -> None:
@@ -91,7 +91,7 @@ def test_openvino_inference(ckpt_path: Callable[[str], Path]) -> None:
     Args:
         task (TaskType): Task type
         ckpt_path: Callable[[str], Path]: Path to trained PADIM model checkpoint.
-        dataset_path (Path): Path to dummy dataset.
+        dataset_path (Path): Path to dummy data.
     """
     model = Padim()
     engine = Engine()

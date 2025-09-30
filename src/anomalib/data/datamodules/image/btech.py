@@ -3,8 +3,8 @@
 
 """BTech Data Module.
 
-This module provides a PyTorch Lightning DataModule for the BTech dataset. If the
-dataset is not available locally, it will be downloaded and extracted
+This module provides a PyTorch Lightning DataModule for the BTech data. If the
+data is not available locally, it will be downloaded and extracted
 automatically.
 
 Example:
@@ -17,7 +17,7 @@ Example:
         ... )
 
 Notes:
-    The dataset will be automatically downloaded and converted to the required
+    The data will be automatically downloaded and converted to the required
     format when first used. The directory structure after preparation will be::
 
         datasets/
@@ -27,7 +27,7 @@ Notes:
             └── 03/
 
 License:
-    BTech dataset is released under the Creative Commons
+    BTech data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0).
     https://creativecommons.org/licenses/by-nc-sa/4.0/
@@ -63,9 +63,9 @@ class BTech(AnomalibDataModule):
     """BTech Lightning Data Module.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/BTech"``.
-        category (str): Category of the BTech dataset (e.g. ``"01"``, ``"02"``,
+        category (str): Category of the BTech data (e.g. ``"01"``, ``"02"``,
             or ``"03"``).
             Defaults to ``"01"``.
         train_batch_size (int, optional): Training batch size.
@@ -185,14 +185,14 @@ class BTech(AnomalibDataModule):
         )
 
     def prepare_data(self) -> None:
-        """Download the dataset if not available.
+        """Download the data if not available.
 
-        This method checks if the specified dataset is available in the file
-        system. If not, it downloads and extracts the dataset into the
+        This method checks if the specified data is available in the file
+        system. If not, it downloads and extracts the data into the
         appropriate directory.
 
         Example:
-            Assume the dataset is not available on the file system.
+            Assume the data is not available on the file system.
             Here's how the directory structure looks before and after calling
             ``prepare_data``::
 
@@ -217,12 +217,12 @@ class BTech(AnomalibDataModule):
                     └── 03
         """
         if (self.root / self.category).is_dir():
-            logger.info("Found the dataset.")
+            logger.info("Found the data.")
         else:
             download_and_extract(self.root.parent, DOWNLOAD_INFO)
 
             # rename folder and convert images
-            logger.info("Renaming the dataset directory")
+            logger.info("Renaming the data directory")
             shutil.move(
                 src=str(self.root.parent / "BTech_Dataset_transformed"),
                 dst=str(self.root),

@@ -50,7 +50,7 @@ class TestAPI:
 
         Args:
             model_name (str): Name of the model.
-            dataset_path (Path): Root to dataset from fixture.
+            dataset_path (Path): Root to data from fixture.
             project_path (Path): Path to temporary project folder from fixture.
         """
         model, dataset, engine = self._get_objects(
@@ -66,7 +66,7 @@ class TestAPI:
 
         Args:
             model_name (str): Name of the model.
-            dataset_path (Path): Root to dataset from fixture.
+            dataset_path (Path): Root to data from fixture.
             project_path (Path): Path to temporary project folder from fixture.
         """
         model, dataset, engine = self._get_objects(
@@ -86,7 +86,7 @@ class TestAPI:
 
         Args:
             model_name (str): Name of the model.
-            dataset_path (Path): Root to dataset from fixture.
+            dataset_path (Path): Root to data from fixture.
             project_path (Path): Path to temporary project folder from fixture.
         """
         model, dataset, engine = self._get_objects(
@@ -106,7 +106,7 @@ class TestAPI:
 
         Args:
             model_name (str): Name of the model.
-            dataset_path (Path): Root to dataset from fixture.
+            dataset_path (Path): Root to data from fixture.
             project_path (Path): Path to temporary project folder from fixture.
         """
         model, dataset, engine = self._get_objects(
@@ -126,7 +126,7 @@ class TestAPI:
 
         Args:
             model_name (str): Name of the model.
-            dataset_path (Path): Root to dataset from fixture.
+            dataset_path (Path): Root to data from fixture.
             project_path (Path): Path to temporary project folder from fixture.
         """
         model, datamodule, engine = self._get_objects(
@@ -154,7 +154,7 @@ class TestAPI:
         Args:
             model_name (str): Name of the model.
             export_type (ExportType): Framework to export to.
-            dataset_path (Path): Root to dataset from fixture.
+            dataset_path (Path): Root to data from fixture.
             project_path (Path): Path to temporary project folder from fixture.
         """
         model, dataset, engine = self._get_objects(
@@ -177,15 +177,15 @@ class TestAPI:
         dataset_path: Path,
         project_path: Path,
     ) -> tuple[AnomalibModule, AnomalibDataModule, Engine]:
-        """Return model, dataset, and engine objects.
+        """Return model, data, and engine objects.
 
         Args:
             model_name (str): Name of the model to train
-            dataset_path (Path): Path to the root of dummy dataset
+            dataset_path (Path): Path to the root of dummy data
             project_path (Path): path to the temporary project folder
 
         Returns:
-            tuple[AnomalibModule, AnomalibDataModule, Engine]: Returns the created objects for model, dataset,
+            tuple[AnomalibModule, AnomalibDataModule, Engine]: Returns the created objects for model, data,
                 and engine
         """
         # set extra model args
@@ -199,7 +199,7 @@ class TestAPI:
         if model_name in {"ai_vad", "fuvas"}:
             pytest.skip("Revisit video models tests")
         else:
-            # EfficientAd requires that the batch size be lesser than the number of images in the dataset.
+            # EfficientAd requires that the batch size be lesser than the number of images in the data.
             # This is so that the LR step size is not 0.
             dataset = MVTecAD(
                 root=dataset_path / "mvtecad",

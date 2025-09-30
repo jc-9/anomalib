@@ -126,7 +126,7 @@ class SparseRandomProjection:
         of components needed to approximately preserve distances.
 
         Args:
-            n_samples (int): Number of samples in the dataset.
+            n_samples (int): Number of samples in the data.
             eps (float, optional): Minimum distortion rate. Defaults to ``0.1``.
 
         Returns:

@@ -3,12 +3,12 @@
 
 """Real-IAD Dataset.
 
-This module provides PyTorch Dataset implementation for the Real-IAD dataset.
-The dataset contains 30 categories of industrial objects with both normal and
+This module provides PyTorch Dataset implementation for the Real-IAD data.
+The data contains 30 categories of industrial objects with both normal and
 anomalous samples, captured from 5 different camera viewpoints.
 
 Dataset Structure:
-    The dataset follows this directory structure:
+    The data follows this directory structure:
         Real-IAD/
         ├── realiad_256/      # 256x256 resolution images
         │   └── CATEGORY/     # e.g. audiojack, button_battery, etc.
@@ -79,20 +79,20 @@ CATEGORIES = (
 
 
 class RealIADDataset(AnomalibDataset):
-    """Real-IAD dataset class.
+    """Real-IAD data class.
 
-    Dataset class for loading and processing Real-IAD dataset images. Supports
+    Dataset class for loading and processing Real-IAD data images. Supports
     both classification and segmentation tasks, with multi-view capabilities.
 
-    The dataset provides:
+    The data provides:
     - 30 industrial object categories
     - 5 camera viewpoints per object (C1-C5)
     - Multiple image resolutions (256x256, 512x512, 1024x1024)
     - Segmentation masks for anomalous samples
-    - JSON metadata for flexible dataset organization
+    - JSON metadata for flexible data organization
 
     Args:
-        root (Path | str): Path to root directory containing the dataset.
+        root (Path | str): Path to root directory containing the data.
             Defaults to ``"./datasets/Real-IAD"``.
         category (str): Category name, must be one of ``CATEGORIES``.
             Defaults to ``"audiojack"``.
@@ -114,7 +114,7 @@ class RealIADDataset(AnomalibDataset):
         >>> from anomalib.data.datasets import RealIADDataset
 
         >>> # Using base JSON metadata (multi-view) with string resolution
-        >>> dataset = RealIADDataset(
+        >>> data = RealIADDataset(
         ...     root=Path("./datasets/Real-IAD"),
         ...     category="audiojack",
         ...     resolution="1024",
@@ -123,23 +123,23 @@ class RealIADDataset(AnomalibDataset):
         ... )
 
         >>> # Using integer resolution
-        >>> dataset = RealIADDataset(
+        >>> data = RealIADDataset(
         ...     category="button_battery",
         ...     resolution=512
         ... )
 
         >>> # Using single-view metadata
-        >>> dataset = RealIADDataset(
+        >>> data = RealIADDataset(
         ...     json_path="realiad_jsons/realiad_jsons_sv/audiojack.json"
         ... )
 
         >>> # Using FUIAD v0.4 metadata (filtered subset)
-        >>> dataset = RealIADDataset(
+        >>> data = RealIADDataset(
         ...     json_path="realiad_jsons/realiad_jsons_fuiad_0.4/audiojack.json"
         ... )
 
         >>> # Using custom JSON file
-        >>> dataset = RealIADDataset(
+        >>> data = RealIADDataset(
         ...     json_path="path/to/custom/metadata.json"
         ... )
 
@@ -147,7 +147,7 @@ class RealIADDataset(AnomalibDataset):
         - Normal samples are in the 'OK' directory, anomalous in 'NG'
         - Each sample has a unique ID (SXXXX) and camera view (CX)
         - Anomalous samples include defect type and segmentation masks
-        - JSON metadata provides flexible dataset organization
+        - JSON metadata provides flexible data organization
         - The task (classification/segmentation) is determined by mask availability
     """
 
@@ -160,10 +160,10 @@ class RealIADDataset(AnomalibDataset):
         split: str | Split | None = None,
         json_path: str | Path = "realiad_jsons/realiad_jsons/{category}.json",
     ) -> None:
-        """Initialize RealIAD dataset.
+        """Initialize RealIAD data.
 
         Args:
-            root: Path to root directory containing the dataset.
+            root: Path to root directory containing the data.
             category: Category name, must be one of ``CATEGORIES``.
             resolution: Image resolution, must be one of ``RESOLUTIONS`` or their integer equivalents.
                 For example, both "256" and 256 are valid.
@@ -179,7 +179,7 @@ class RealIADDataset(AnomalibDataset):
         super().__init__(augmentations=augmentations)
 
         if category not in CATEGORIES:
-            msg = f"Category {category} not found in Real-IAD dataset. Available categories: {CATEGORIES}"
+            msg = f"Category {category} not found in Real-IAD data. Available categories: {CATEGORIES}"
             raise ValueError(msg)
 
         # Convert resolution to string if it's an integer
@@ -187,7 +187,7 @@ class RealIADDataset(AnomalibDataset):
             resolution = str(resolution)
 
         if resolution not in RESOLUTIONS:
-            msg = f"Resolution {resolution} not found in Real-IAD dataset. Available resolutions: {RESOLUTIONS}"
+            msg = f"Resolution {resolution} not found in Real-IAD data. Available resolutions: {RESOLUTIONS}"
             raise ValueError(msg)
 
         self.root = Path(root)
@@ -218,7 +218,7 @@ class RealIADDataset(AnomalibDataset):
         # Construct the path to the category directory based on resolution
         self.root_category = self.root / f"realiad_{resolution}" / category
 
-        # Create dataset samples
+        # Create data samples
         self.samples = make_realiad_dataset(
             self.root_category,
             split=self.split,
@@ -236,12 +236,12 @@ def make_realiad_dataset(
     """Create Real-IAD samples by parsing the JSON metadata.
 
     Args:
-        root (Path | str): Path to dataset root directory
+        root (Path | str): Path to data root directory
         split (str | Split | None, optional): Dataset split (train or test)
             Defaults to ``None``.
         extensions (Sequence[str] | None, optional): Valid file extensions
             Defaults to ``None``.
-        metadata (dict | None, optional): JSON metadata containing dataset organization.
+        metadata (dict | None, optional): JSON metadata containing data organization.
             Defaults to ``None``.
 
     Returns:
@@ -257,7 +257,7 @@ def make_realiad_dataset(
     root = validate_path(root)
 
     if metadata is None:
-        msg = "JSON metadata is required for RealIAD dataset"
+        msg = "JSON metadata is required for RealIAD data"
         raise ValueError(msg)
 
     samples_list = []

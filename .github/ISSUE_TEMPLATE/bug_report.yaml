@@ -14,7 +14,7 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: dataset
+    id: data
     attributes:
       label: Dataset
       description: Which Dataset are you using?

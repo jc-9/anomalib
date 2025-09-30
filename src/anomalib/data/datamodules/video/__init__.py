@@ -11,7 +11,7 @@ anomaly detection. The following data modules are available:
 - ``UCSDped``: UCSD Pedestrian Dataset for anomaly detection
 
 Example:
-    Load the Avenue dataset::
+    Load the Avenue data::
 
         >>> from anomalib.data import Avenue
         >>> datamodule = Avenue(
@@ -31,7 +31,7 @@ from .ucsd_ped import UCSDped
 class VideoDataFormat(str, Enum):
     """Supported Video Dataset Types.
 
-    The following dataset formats are supported:
+    The following data formats are supported:
 
     - ``UCSDPED``: UCSD Pedestrian Dataset
     - ``AVENUE``: CUHK Avenue Dataset

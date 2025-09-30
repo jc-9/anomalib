@@ -190,12 +190,12 @@ class DummyVideoGenerator(DummyImageGenerator):
 
 
 class DummyDatasetGenerator(ContextDecorator):
-    """Base dummy dataset generator class to be implemented by Image and Video generators.
+    """Base dummy data generator class to be implemented by Image and Video generators.
 
     Args:
-        data_format (DataFormat): Data format of the dataset.
-        root (Path | str | None, optional): Root directory to save the dataset. Defaults to None.
-        dataset_name (str, optional): Name of the dataset. Defaults to None.
+        data_format (DataFormat): Data format of the data.
+        root (Path | str | None, optional): Root directory to save the data. Defaults to None.
+        dataset_name (str, optional): Name of the data. Defaults to None.
         num_train (int, optional): Number of training images to generate. Defaults to 5.
         num_test (int, optional): Number of testing images to generate per category. Defaults to 5.
         seed (int, optional): Fixes seed if any number greater than 0 is provided. 0 means no seed. Defaults to 0.
@@ -205,7 +205,7 @@ class DummyDatasetGenerator(ContextDecorator):
         >>>     some_function()
 
         Alternatively, you can use it as a standalone class.
-        This will create a temporary directory with the dataset.
+        This will create a temporary directory with the data.
 
         >>> generator = DummyDatasetGenerator(num_train=10, num_test=10)
         >>> generator.generate_dataset()
@@ -239,8 +239,8 @@ class DummyDatasetGenerator(ContextDecorator):
         self.rng = np.random.default_rng(seed)
 
     def generate_dataset(self) -> None:
-        """Generate dataset."""
-        # get dataset specific ``generate_dataset`` function based on string.
+        """Generate data."""
+        # get data specific ``generate_dataset`` function based on string.
 
         if hasattr(self, f"_generate_dummy_{self.data_format.value}_dataset"):
             method_name = f"_generate_dummy_{self.data_format.value}_dataset"
@@ -251,7 +251,7 @@ class DummyDatasetGenerator(ContextDecorator):
             raise NotImplementedError(message)
 
     def __enter__(self) -> Path:
-        """Creates the dataset in temp folder."""
+        """Creates the data in temp folder."""
         self.generate_dataset()
         return self.dataset_root
 
@@ -261,10 +261,10 @@ class DummyDatasetGenerator(ContextDecorator):
 
 
 class DummyImageDatasetGenerator(DummyDatasetGenerator):
-    r"""Context for generating dummy shapes dataset.
+    r"""Context for generating dummy shapes data.
 
     Args:
-        data_format (DataFormat): Data format of the dataset.
+        data_format (DataFormat): Data format of the data.
         root (Path | str, optional): Path to the root directory. Defaults to None.
         num_train (int, optional): Number of training images to generate. Defaults to 1000.
         num_test (int, optional): Number of testing images to generate per category. Defaults to 100.
@@ -276,11 +276,11 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
         seed (int, optional): Fixes seed if any number greater than 0 is provided. 0 means no seed. Defaults to 0.
 
     Examples:
-        To create an MVTecAD dataset with 10 training images and 10 testing images per category, use the following code.
+        To create an MVTecAD data with 10 training images and 10 testing images per category, use the following code.
         >>> dataset_generator = DummyImageDatasetGenerator(data_format="mvtecad", num_train=10, num_test=10)
         >>> dataset_generator.generate_dataset()
 
-        In order to provide a specific directory to save the dataset, use the ``root`` argument.
+        In order to provide a specific directory to save the data, use the ``root`` argument.
         >>> dataset_generator = DummyImageDatasetGenerator(data_format="mvtecad", root="./datasets/dummy")
         >>> dataset_generator.generate_dataset()
 
@@ -292,7 +292,7 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
         >>> from anomalib.data import ImageDataFormat
         >>> print(list(ImageDataFormat))
 
-        Then you can use the ``ImageDataFormat`` enum to generate the dataset.
+        Then you can use the ``ImageDataFormat`` enum to generate the data.
         >>> dataset_generator = DummyImageDatasetGenerator(data_format="btech", num_train=10, num_test=10)
     """
 
@@ -324,7 +324,7 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
         self.image_generator = DummyImageGenerator(image_shape=image_shape, rng=self.rng)
 
     def _generate_dummy_datumaro_dataset(self) -> None:
-        """Generates dummy Datumaro dataset in a temporary directory."""
+        """Generates dummy Datumaro data in a temporary directory."""
         # generate images
         image_root = self.dataset_root / "images" / "default"
         image_root.mkdir(parents=True, exist_ok=True)
@@ -368,8 +368,8 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
         mask_suffix: str = "_mask",
         mask_extension: str = ".png",
     ) -> None:
-        """Generates dummy MVTecAD dataset in a temporary directory using the same convention as MVTec AD."""
-        # MVTec has multiple subcategories within the dataset.
+        """Generates dummy MVTecAD data in a temporary directory using the same convention as MVTec AD."""
+        # MVTec has multiple subcategories within the data.
         dataset_category = "dummy"
 
         # Create normal images.
@@ -393,7 +393,7 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
             self.image_generator.generate_image(label, image_filename, mask_filename)
 
     def _generate_dummy_folder_dataset(self) -> None:
-        """Generate dummy folder dataset in a temporary directory."""
+        """Generate dummy folder data in a temporary directory."""
         # folder names
         normal_dir = self.root / self.normal_category
         abnormal_dir = self.root / self.abnormal_category
@@ -412,17 +412,17 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
             self.image_generator.generate_image(label, image_filename, mask_filename)
 
     def _generate_dummy_tabular_dataset(self) -> None:
-        """Generate dummy folder structure for tabular dataset in a temporary directory."""
+        """Generate dummy folder structure for tabular data in a temporary directory."""
         self._generate_dummy_folder_dataset()
 
     def _generate_dummy_btech_dataset(self) -> None:
-        """Generate dummy BeanTech dataset in directory using the same convention as BeanTech AD."""
+        """Generate dummy BeanTech data in directory using the same convention as BeanTech AD."""
         # BeanTech AD follows the same convention as MVTec AD.
         self._generate_dummy_mvtecad_dataset(normal_dir="ok", abnormal_dir="ko", mask_suffix="")
 
     def _generate_dummy_mvtec_3d_dataset(self) -> None:
-        """Generate dummy MVTec 3D AD dataset in a temporary directory using the same convention as MVTec AD."""
-        # MVTec 3D AD has multiple subcategories within the dataset.
+        """Generate dummy MVTec 3D AD data in a temporary directory using the same convention as MVTec AD."""
+        # MVTec 3D AD has multiple subcategories within the data.
         dataset_category = "dummy"
 
         # Create training and validation images.
@@ -455,8 +455,8 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
                         self.image_generator.save_image(filename=filename, image=image)
 
     def _generate_dummy_mvtec_loco_dataset(self) -> None:
-        """Generates dummy MVTec LOCO AD dataset in a temporary directory using the same convention as MVTec LOCO AD."""
-        # MVTec LOCO has multiple subcategories within the dataset.
+        """Generates dummy MVTec LOCO AD data in a temporary directory using the same convention as MVTec LOCO AD."""
+        # MVTec LOCO has multiple subcategories within the data.
         dataset_category = "dummy"
 
         extension = ".png"
@@ -490,8 +490,8 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
                 self.image_generator.generate_image(label, image_filename, mask_filename)
 
     def _generate_dummy_kolektor_dataset(self) -> None:
-        """Generate dummy Kolektor dataset in directory using the same convention as Kolektor AD."""
-        # Emulating the first two categories of Kolektor dataset.
+        """Generate dummy Kolektor data in directory using the same convention as Kolektor AD."""
+        # Emulating the first two categories of Kolektor data.
         for category in ("kos01", "kos02"):
             for i in range(self.num_train * 2):
                 # Half of the images are normal, while the rest are abnormal.
@@ -501,12 +501,12 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
                 self.image_generator.generate_image(label, image_filename, mask_filename)
 
     def _generate_dummy_mpdd_dataset(self) -> None:
-        """Generate dummy MPDD dataset in directory using the same convention as MVTec AD."""
-        # MPDD dataset follows the same convention as MVTec AD.
+        """Generate dummy MPDD data in directory using the same convention as MVTec AD."""
+        # MPDD data follows the same convention as MVTec AD.
         self._generate_dummy_mvtecad_dataset(normal_dir="good", abnormal_dir="bad", image_extension=".png")
 
     def _generate_dummy_realiad_dataset(self) -> None:
-        """Generate dummy RealIAD dataset in directory using the same convention as RealIAD."""
+        """Generate dummy RealIAD data in directory using the same convention as RealIAD."""
         import json
 
         # Create the resolution directory
@@ -582,7 +582,7 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
         mask_suffix: str = "_mask",
         mask_extension: str = ".png",
     ) -> None:
-        """Generate a dummy MVTec AD 2 dataset.
+        """Generate a dummy MVTec AD 2 data.
 
         Args:
             normal_dir (str, optional): Name of the normal directory. Defaults to "good".
@@ -591,7 +591,7 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
             mask_suffix (str, optional): Suffix to append to mask filenames. Defaults to "_mask".
             mask_extension (str, optional): Extension of the mask files. Defaults to ".png".
         """
-        # MVTec AD 2 has multiple subcategories within the dataset
+        # MVTec AD 2 has multiple subcategories within the data
         dataset_category = "dummy"
         category_root = self.dataset_root / dataset_category
 
@@ -641,25 +641,25 @@ class DummyImageDatasetGenerator(DummyDatasetGenerator):
             self.image_generator.generate_image(label=LabelName.NORMAL, image_filename=image_path)
 
     def _generate_dummy_vad_dataset(self) -> None:
-        """Generate dummy VAD dataset in directory using the same convention as MVTec AD."""
-        # VAD dataset follows the same convention as MVTec AD.
+        """Generate dummy VAD data in directory using the same convention as MVTec AD."""
+        # VAD data follows the same convention as MVTec AD.
         self._generate_dummy_mvtecad_dataset(normal_dir="good", abnormal_dir="bad", image_extension=".png")
 
     def _generate_dummy_visa_dataset(self) -> None:
-        """Generate dummy Visa dataset in directory using the same convention as Visa AD."""
-        # Visa dataset on anomalib follows the same convention as MVTec AD.
+        """Generate dummy Visa data in directory using the same convention as Visa AD."""
+        # Visa data on anomalib follows the same convention as MVTec AD.
         # The only difference is that the root directory has a subdirectory called "visa_pytorch".
         self.dataset_root = self.dataset_root.parent / "visa_pytorch"
         self._generate_dummy_mvtecad_dataset(normal_dir="good", abnormal_dir="bad", image_extension=".jpg")
 
 
 class DummyVideoDatasetGenerator(DummyDatasetGenerator):
-    """Dummy video dataset generator.
+    """Dummy video data generator.
 
     Args:
-        data_format (DataFormat): Data format of the dataset.
-        root (Path | str | None, optional): Root directory to save the dataset. Defaults to None.
-        dataset_name (str, optional): Name of the dataset. Defaults to "ucsdped1".
+        data_format (DataFormat): Data format of the data.
+        root (Path | str | None, optional): Root directory to save the data. Defaults to None.
+        dataset_name (str, optional): Name of the data. Defaults to "ucsdped1".
         num_frames (int, optional): Number of frames to generate the video. Defaults to 32.
         frame_shape (tuple[int, int], optional): Shape of individual frames. Defaults to (256, 256).
         num_train (int, optional): Number of training images to generate. Defaults to 5.
@@ -667,11 +667,11 @@ class DummyVideoDatasetGenerator(DummyDatasetGenerator):
         seed (int, optional): Fixes seed if any number greater than 0 is provided. 0 means no seed. Defaults to 0.
 
     Examples:
-        To create a UCSDped1 dataset with 10 training videos and 10 testing videos, use the following code.
+        To create a UCSDped1 data with 10 training videos and 10 testing videos, use the following code.
         >>> dataset_generator = DummyVideoDatasetGenerator(data_format="ucsdped", num_train=10, num_test=10)
         >>> dataset_generator.generate_dataset()
 
-        In order to provide a specific directory to save the dataset, use the ``root`` argument.
+        In order to provide a specific directory to save the data, use the ``root`` argument.
         >>> dataset_generator = DummyVideoDatasetGenerator(data_format="ucsdped", root="./datasets/dummy")
         >>> dataset_generator.generate_dataset()
 
@@ -683,7 +683,7 @@ class DummyVideoDatasetGenerator(DummyDatasetGenerator):
         >>> from anomalib.data import VideoDataFormat
         >>> print(list(VideoDataFormat))
 
-        Based on the enum, you can generate the dataset.
+        Based on the enum, you can generate the data.
         >>> dataset_generator = DummyVideoDatasetGenerator(data_format="avenue", num_train=10, num_test=10)
         >>> dataset_generator.generate_dataset()
     """
@@ -710,7 +710,7 @@ class DummyVideoDatasetGenerator(DummyDatasetGenerator):
         self.video_generator = DummyVideoGenerator(num_frames=num_frames, frame_shape=frame_shape)
 
     def _generate_dummy_ucsdped_dataset(self, train_dir: str = "Train", test_dir: str = "Test") -> None:
-        """Generate dummy UCSD dataset."""
+        """Generate dummy UCSD data."""
         # generate training data
         dataset_category = "dummy"
         train_path = self.dataset_root / dataset_category / train_dir
@@ -743,7 +743,7 @@ class DummyVideoDatasetGenerator(DummyDatasetGenerator):
         test_dir: str = "testing_videos",
         ground_truth_dir: str = "ground_truth_demo",
     ) -> None:
-        """Generate dummy Avenue dataset."""
+        """Generate dummy Avenue data."""
         # generate training data
         train_path = self.dataset_root / train_dir
         train_path.mkdir(exist_ok=True, parents=True)
@@ -781,7 +781,7 @@ class DummyVideoDatasetGenerator(DummyDatasetGenerator):
         train_dir: str = "training",
         test_dir: str = "testing",
     ) -> None:
-        """Generate dummy ShanghaiTech dataset."""
+        """Generate dummy ShanghaiTech data."""
         # generate training data
         path = self.dataset_root / train_dir / "converted_videos"
         path.mkdir(exist_ok=True, parents=True)

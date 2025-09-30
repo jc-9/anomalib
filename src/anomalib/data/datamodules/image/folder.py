@@ -46,7 +46,7 @@ class Folder(AnomalibDataModule):
     """Folder DataModule.
 
     Args:
-        name (str): Name of the dataset. Used for logging/saving.
+        name (str): Name of the data. Used for logging/saving.
         normal_dir (str | Path | Sequence): Directory containing normal images.
         root (str | Path | None): Root folder containing normal and abnormal
             directories. Defaults to ``None``.

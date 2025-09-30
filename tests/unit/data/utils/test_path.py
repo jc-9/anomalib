@@ -90,7 +90,7 @@ class TestGenerateOutputFilename:
 
     @staticmethod
     def test_basic_mvtec_style() -> None:
-        """Test basic MVTec-style dataset path handling."""
+        """Test basic MVTec-style data path handling."""
         input_path = Path("/data/MVTecAD/bottle/test/broken_large/000.png")
         output_path = Path("./results")
         result = generate_output_filename(input_path, output_path, "MVTecAD", "bottle")
@@ -146,7 +146,7 @@ class TestGenerateOutputFilename:
 
     @staticmethod
     def test_case_insensitive_matching() -> None:
-        """Test case-insensitive matching of dataset and category names."""
+        """Test case-insensitive matching of data and category names."""
         input_path = Path("/data/mvtecad/BOTTLE/test/000.png")
         output_path = Path("./results")
         result = generate_output_filename(input_path, output_path, "MVTecAD", "bottle")

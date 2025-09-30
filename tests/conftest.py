@@ -43,26 +43,26 @@ def project_path() -> Generator[Path, None, None]:
 
 @pytest.fixture(scope="session")
 def dataset_path(project_path: Path) -> Path:
-    """Return a temporary directory path that is used as the dataset directory for the entire test.
+    """Return a temporary directory path that is used as the data directory for the entire test.
 
-    This fixture first generates the dummy datasets and return the dataset path before any other tests are run.
+    This fixture first generates the dummy datasets and return the data path before any other tests are run.
     Overall, the fixture does the following:
 
-    1. Generate the image dataset.
-    2. Generate the video dataset.
-    3. Return the dataset path that contains the dummy datasets.
+    1. Generate the image data.
+    2. Generate the video data.
+    3. Return the data path that contains the dummy datasets.
     """
     dataset_path_ = project_path / "datasets"
 
     # 1. Create the dummy image datasets.
     for data_format in list(ImageDataFormat):
-        # Do not generate a dummy dataset for folder and tabular datasets.
+        # Do not generate a dummy data for folder and tabular datasets.
         # We could use one of these datasets to test the folders and tabular datasets.
         if not data_format.value.startswith(("folder", "tabular")):
             dataset_generator = DummyImageDatasetGenerator(data_format=data_format, root=dataset_path_)
             dataset_generator.generate_dataset()
 
-    # Generate RealIAD dataset separately since it has a unique format
+    # Generate RealIAD data separately since it has a unique format
     dataset_generator = DummyImageDatasetGenerator(data_format="realiad", root=dataset_path_)
     dataset_generator.generate_dataset()
 
@@ -71,7 +71,7 @@ def dataset_path(project_path: Path) -> Path:
         dataset_generator = DummyVideoDatasetGenerator(data_format=data_format, root=dataset_path_)
         dataset_generator.generate_dataset()
 
-    # 3. Return the dataset path.
+    # 3. Return the data path.
     return dataset_path_
 
 

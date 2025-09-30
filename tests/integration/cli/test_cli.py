@@ -22,7 +22,7 @@ class TestCLI:
         """Test fit CLI.
 
         Args:
-            dataset_path (Path): Root of the synthetic/original dataset.
+            dataset_path (Path): Root of the synthetic/original data.
             project_path (Path): Path to temporary project folder.
         """
         AnomalibCLI(
@@ -37,7 +37,7 @@ class TestCLI:
         """Test the test method of the CLI.
 
         Args:
-            dataset_path (Path): Root of the synthetic/original dataset.
+            dataset_path (Path): Root of the synthetic/original data.
             project_path (Path): Path to temporary project folder.
         """
         AnomalibCLI(
@@ -54,7 +54,7 @@ class TestCLI:
         """Test the train method of the CLI.
 
         Args:
-            dataset_path (Path): Root of the synthetic/original dataset.
+            dataset_path (Path): Root of the synthetic/original data.
             project_path (Path): Path to temporary project folder.
         """
         AnomalibCLI(
@@ -71,7 +71,7 @@ class TestCLI:
         """Test the validate method of the CLI.
 
         Args:
-            dataset_path (Path): Root of the synthetic/original dataset.
+            dataset_path (Path): Root of the synthetic/original data.
             project_path (Path): Path to temporary project folder.
         """
         AnomalibCLI(
@@ -90,7 +90,7 @@ class TestCLI:
         This test uses the MVTec AD dataloader for predict test.
 
         Args:
-            dataset_path (Path): Root of the synthetic/original dataset.
+            dataset_path (Path): Root of the synthetic/original data.
             project_path (Path): Path to temporary project folder.
         """
         # Test with MVTec AD Dataset
@@ -164,7 +164,7 @@ class TestCLI:
         """Test the export method of the CLI.
 
         Args:
-            dataset_path (Path): Root of the synthetic/original dataset.
+            dataset_path (Path): Root of the synthetic/original data.
             project_path (Path): Path to temporary project folder.
             export_type (ExportType): Export type.
         """
@@ -184,7 +184,7 @@ class TestCLI:
         """Return common CLI args for all models.
 
         Args:
-            dataset_path (Path): Path to the dataset. If the path is None, data arguments are not appended to the args.
+            dataset_path (Path): Path to the data. If the path is None, data arguments are not appended to the args.
             project_path (Path): Path to the project folder.
             model_name (str): Name of the model. Defaults to None.
         """

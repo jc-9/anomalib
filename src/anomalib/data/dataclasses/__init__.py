@@ -41,7 +41,7 @@ Torch Dataclasses
 ~~~~~~~~~~~~~~~~
 
 - :class:`Batch`: Base class for torch-based batch data
-- :class:`DatasetItem`: Base class for torch-based dataset items
+- :class:`DatasetItem`: Base class for torch-based data items
 - :class:`DepthItem`: Single depth data item
     - RGB image: ``(3, H, W)``
     - Depth map: ``(H, W)``

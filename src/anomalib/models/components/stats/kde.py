@@ -40,7 +40,7 @@ class GaussianKDE(DynamicBufferMixin):
         >>> from anomalib.models.components.stats import GaussianKDE
         >>> features = torch.randn(100, 10)  # 100 samples, 10 dimensions
         >>> # Initialize and fit in one step
-        >>> kde = GaussianKDE(dataset=features)
+        >>> kde = GaussianKDE(data=features)
         >>> # Or fit later
         >>> kde = GaussianKDE()
         >>> kde.fit(features)
@@ -55,7 +55,7 @@ class GaussianKDE(DynamicBufferMixin):
             self.fit(dataset)
 
         self.register_buffer("bw_transform", torch.empty(0))
-        self.register_buffer("dataset", torch.empty(0))
+        self.register_buffer("data", torch.empty(0))
         self.register_buffer("norm", torch.empty(0))
 
         self.bw_transform = torch.empty(0)
@@ -91,13 +91,13 @@ class GaussianKDE(DynamicBufferMixin):
         return estimate
 
     def fit(self, dataset: torch.Tensor) -> None:
-        """Fit the KDE model to the input dataset.
+        """Fit the KDE model to the input data.
 
         Computes the bandwidth matrix using Scott's rule and transforms the data
         accordingly.
 
         Args:
-            dataset (torch.Tensor): Input dataset of shape ``(N, D)`` where ``N``
+            dataset (torch.Tensor): Input data of shape ``(N, D)`` where ``N``
                 is the number of samples and ``D`` is the dimension.
 
         Example:

@@ -12,7 +12,7 @@ Example:
         >>> from anomalib.data import Folder3D
         >>> datamodule = Folder3D(
         ...     name="my_dataset",
-        ...     root="path/to/dataset",
+        ...     root="path/to/data",
         ...     normal_dir="normal",
         ...     abnormal_dir="abnormal"
         ... )
@@ -34,7 +34,7 @@ class Folder3D(AnomalibDataModule):
     RGB and depth image pairs organized in folders.
 
     Args:
-        name (str): Name of the dataset used for logging and saving.
+        name (str): Name of the data used for logging and saving.
         normal_dir (str | Path): Directory containing normal RGB images.
         root (str | Path): Root folder containing normal and abnormal dirs.
         abnormal_dir (str | Path | None, optional): Directory containing abnormal

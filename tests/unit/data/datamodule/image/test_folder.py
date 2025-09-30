@@ -25,7 +25,7 @@ class TestFolder(_TestAnomalibImageDatamodule):
         # expects a relative directory to the root.
         mask_dir = "ground_truth/bad"
 
-        # Create and prepare the dataset
+        # Create and prepare the data
         datamodule_ = Folder(
             name="dummy",
             root=dataset_path / "mvtecad" / "dummy",

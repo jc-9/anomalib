@@ -3,15 +3,15 @@
 
 """BTech Dataset.
 
-This module provides PyTorch Dataset implementation for the BTech dataset. The
-dataset will be downloaded and extracted automatically if not found locally.
+This module provides PyTorch Dataset implementation for the BTech data. The
+data will be downloaded and extracted automatically if not found locally.
 
-The dataset contains 3 categories of industrial objects with both normal and
+The data contains 3 categories of industrial objects with both normal and
 anomalous samples. Each category includes RGB images and pixel-level ground truth
 masks for anomaly segmentation.
 
 License:
-    BTech dataset is released under the Creative Commons
+    BTech data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0) https://creativecommons.org/licenses/by-nc-sa/4.0/
 
@@ -34,13 +34,13 @@ CATEGORIES = ("01", "02", "03")
 
 
 class BTechDataset(AnomalibDataset):
-    """BTech dataset class.
+    """BTech data class.
 
-    Dataset class for loading and processing BTech dataset images. Supports both
+    Dataset class for loading and processing BTech data images. Supports both
     classification and segmentation tasks.
 
     Args:
-        root (Path | str): Path to root directory containing the dataset.
+        root (Path | str): Path to root directory containing the data.
         category (str): Category name, must be one of ``CATEGORIES``.
         transform (Transform | None, optional): Transforms to apply to the images.
             Defaults to ``None``.
@@ -50,23 +50,23 @@ class BTechDataset(AnomalibDataset):
     Example:
         >>> from pathlib import Path
         >>> from anomalib.data.datasets import BTechDataset
-        >>> dataset = BTechDataset(
+        >>> data = BTechDataset(
         ...     root=Path("./datasets/btech"),
         ...     category="01",
         ...     split="train"
         ... )
-        >>> dataset[0].keys()
+        >>> data[0].keys()
         dict_keys(['image'])
 
-        >>> dataset.split = "test"
-        >>> dataset[0].keys()
+        >>> data.split = "test"
+        >>> data[0].keys()
         dict_keys(['image', 'image_path', 'label'])
 
         >>> # For segmentation task
-        >>> dataset.split = "test"
-        >>> dataset[0].keys()
+        >>> data.split = "test"
+        >>> data[0].keys()
         dict_keys(['image_path', 'label', 'mask_path', 'image', 'mask'])
-        >>> dataset[0]["image"].shape, dataset[0]["mask"].shape
+        >>> data[0]["image"].shape, data[0]["mask"].shape
         (torch.Size([3, 256, 256]), torch.Size([256, 256]))
     """
 
@@ -91,7 +91,7 @@ def make_btech_dataset(path: Path, split: str | Split | None = None) -> DataFram
 
     .. code-block:: bash
 
-        path/to/dataset/
+        path/to/data/
         ├── split/
         │   └── category/
         │       └── image_filename.png
@@ -100,7 +100,7 @@ def make_btech_dataset(path: Path, split: str | Split | None = None) -> DataFram
                 └── mask_filename.png
 
     Args:
-        path (Path): Path to dataset directory.
+        path (Path): Path to data directory.
         split (str | Split | None, optional): Dataset split - usually
             ``Split.TRAIN`` or ``Split.TEST``. Defaults to ``None``.
 
@@ -117,7 +117,7 @@ def make_btech_dataset(path: Path, split: str | Split | None = None) -> DataFram
         DataFrame: DataFrame containing samples for the requested split.
 
     Raises:
-        RuntimeError: If no images are found in the dataset directory.
+        RuntimeError: If no images are found in the data directory.
     """
     path = validate_path(path)
 

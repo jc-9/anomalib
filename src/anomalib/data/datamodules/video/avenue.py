@@ -3,9 +3,9 @@
 
 """CUHK Avenue Data Module.
 
-This module provides a PyTorch Lightning DataModule for the CUHK Avenue dataset. If
-the dataset is not already present on the file system, the DataModule class will
-download and extract the dataset, converting the ``.mat`` mask files to ``.png``
+This module provides a PyTorch Lightning DataModule for the CUHK Avenue data. If
+the data is not already present on the file system, the DataModule class will
+download and extract the data, converting the ``.mat`` mask files to ``.png``
 format.
 
 Example:
@@ -45,8 +45,8 @@ Notes:
             └── vol16.mat
 
 License:
-    The CUHK Avenue dataset is released for academic research only. For licensing
-    details, see the original dataset website.
+    The CUHK Avenue data is released for academic research only. For licensing
+    details, see the original data website.
 
 Reference:
     Lu, Cewu, Jianping Shi, and Jiaya Jia. "Abnormal event detection at 150 fps
@@ -86,7 +86,7 @@ class Avenue(AnomalibVideoDataModule):
     """Avenue DataModule class.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/avenue"``.
         gt_dir (Path | str): Path to the ground truth files.
             Defaults to ``"./datasets/avenue/ground_truth_demo"``.
@@ -194,14 +194,14 @@ class Avenue(AnomalibVideoDataModule):
         )
 
     def prepare_data(self) -> None:
-        """Download the dataset if not available.
+        """Download the data if not available.
 
-        This method checks if the specified dataset is available in the file
-        system. If not, it downloads and extracts the dataset into the appropriate
+        This method checks if the specified data is available in the file
+        system. If not, it downloads and extracts the data into the appropriate
         directory.
 
         Example:
-            Assume the dataset is not available on the file system::
+            Assume the data is not available on the file system::
 
                 >>> datamodule = Avenue()
                 >>> datamodule.prepare_data()
@@ -229,7 +229,7 @@ class Avenue(AnomalibVideoDataModule):
                         └── vol16.mat
         """
         if self.root.is_dir():
-            logger.info("Found the dataset.")
+            logger.info("Found the data.")
         else:
             download_and_extract(self.root, DATASET_DOWNLOAD_INFO)
             download_and_extract(self.gt_dir, ANNOTATIONS_DOWNLOAD_INFO)
@@ -251,10 +251,10 @@ class Avenue(AnomalibVideoDataModule):
 
         The masks in the Avenue datasets are provided as matlab (``.mat``) files.
         To speed up data loading, we convert the masks into a separate ``.png``
-        file for every video frame in the dataset.
+        file for every video frame in the data.
 
         Args:
-            gt_dir (Path): Ground truth folder of the dataset.
+            gt_dir (Path): Ground truth folder of the data.
         """
         # convert masks to numpy
         masks_dir = gt_dir / "testing_label_mask"

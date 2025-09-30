@@ -3,8 +3,8 @@
 
 """UCSD Pedestrian Data Module.
 
-This module provides a PyTorch Lightning data module for the UCSD Pedestrian dataset.
-The dataset consists of surveillance videos of pedestrians, with anomalies defined as
+This module provides a PyTorch Lightning data module for the UCSD Pedestrian data.
+The data consists of surveillance videos of pedestrians, with anomalies defined as
 non-pedestrian entities like cars, bikes, etc.
 """
 
@@ -32,7 +32,7 @@ class UCSDped(AnomalibVideoDataModule):
     """UCSD Pedestrian DataModule Class.
 
     Args:
-        root (Path | str): Path to the root directory where the dataset will be
+        root (Path | str): Path to the root directory where the data will be
             downloaded and extracted. Defaults to ``"./datasets/ucsd"``.
         category (str): Dataset subcategory. Must be either ``"UCSDped1"`` or
             ``"UCSDped2"``. Defaults to ``"UCSDped2"``.
@@ -62,7 +62,7 @@ class UCSDped(AnomalibVideoDataModule):
 
     Example:
         >>> datamodule = UCSDped(root="./datasets/ucsd")
-        >>> datamodule.setup()  # Downloads and prepares the dataset
+        >>> datamodule.setup()  # Downloads and prepares the data
         >>> train_loader = datamodule.train_dataloader()
         >>> val_loader = datamodule.val_dataloader()
         >>> test_loader = datamodule.test_dataloader()
@@ -131,13 +131,13 @@ class UCSDped(AnomalibVideoDataModule):
         )
 
     def prepare_data(self) -> None:
-        """Download and extract the dataset if not already available.
+        """Download and extract the data if not already available.
 
-        The method checks if the dataset directory exists. If not, it downloads
-        and extracts the dataset to the specified root directory.
+        The method checks if the data directory exists. If not, it downloads
+        and extracts the data to the specified root directory.
         """
         if (self.root / self.category).is_dir():
-            logger.info("Found the dataset.")
+            logger.info("Found the data.")
         else:
             download_and_extract(self.root, DOWNLOAD_INFO)
 

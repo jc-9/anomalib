@@ -4,7 +4,7 @@
 """Base Anomalib data module.
 
 This module provides the base data module class used across Anomalib. It handles
-dataset splitting, validation set creation, and dataloader configuration.
+data splitting, validation set creation, and dataloader configuration.
 
 The module contains:
     - :class:`AnomalibDataModule`: Base class for all Anomalib data modules
@@ -181,15 +181,15 @@ class AnomalibDataModule(LightningDataModule, ABC):
         augmentations: Transform | None,
         model_transform: Transform,
     ) -> None:
-        """Update the augmentations of the dataset.
+        """Update the augmentations of the data.
 
-        This method passes the user-specified augmentations to a dataset subset. If the model transforms contain
+        This method passes the user-specified augmentations to a data subset. If the model transforms contain
         a Resize transform, it will be appended to the augmentations. This will ensure that resizing takes place
         before collating, which reduces the usage of shared memory by the Dataloader workers.
 
         Args:
             dataset (AnomalibDataset): Dataset to update.
-            augmentations (Transform): Augmentations to apply to the dataset.
+            augmentations (Transform): Augmentations to apply to the data.
             model_transform (Transform): Transform object from the model PreProcessor.
         """
         model_resizes = extract_transforms_by_type(model_transform, Resize)
@@ -238,7 +238,7 @@ class AnomalibDataModule(LightningDataModule, ABC):
     def _setup(self, _stage: str | None = None) -> None:
         """Set up the datasets and perform dynamic subset splitting.
 
-        This method should be implemented by subclasses to define dataset-specific
+        This method should be implemented by subclasses to define data-specific
         setup logic.
 
         Note:
@@ -256,7 +256,7 @@ class AnomalibDataModule(LightningDataModule, ABC):
 
     @property
     def category(self) -> str:
-        """Get dataset category name.
+        """Get data category name.
 
         Returns:
             str: Name of the current category
@@ -265,7 +265,7 @@ class AnomalibDataModule(LightningDataModule, ABC):
 
     @category.setter
     def category(self, category: str) -> None:
-        """Set dataset category name.
+        """Set data category name.
 
         Args:
             category (str): Category name to set

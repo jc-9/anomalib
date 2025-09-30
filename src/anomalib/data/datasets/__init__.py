@@ -3,7 +3,7 @@
 
 """PyTorch Dataset implementations for anomaly detection.
 
-This module provides dataset implementations for various anomaly detection tasks:
+This module provides data implementations for various anomaly detection tasks:
 
 Base Classes:
     - ``AnomalibDataset``: Base class for all Anomalib datasets
@@ -11,28 +11,28 @@ Base Classes:
     - ``AnomalibVideoDataset``: Base class for video datasets
 
 Depth Datasets:
-    - ``Folder3DDataset``: Custom RGB-D dataset from folder structure
-    - ``MVTec3DDataset``: MVTec 3D AD dataset with industrial objects
+    - ``Folder3DDataset``: Custom RGB-D data from folder structure
+    - ``MVTec3DDataset``: MVTec 3D AD data with industrial objects
 
 Image Datasets:
-    - ``BTechDataset``: BTech dataset containing industrial objects
+    - ``BTechDataset``: BTech data containing industrial objects
     - ``DatumaroDataset``: Dataset in Datumaro format (Intel Geti™ export)
-    - ``FolderDataset``: Custom dataset from folder structure
-    - ``KolektorDataset``: Kolektor surface defect dataset
-    - ``MPDDDataset``: Metal Parts Defect Detection dataset
-    - ``MVTecADDataset``: MVTec AD dataset with industrial objects
-    - ``TabularDataset``: Custom tabular dataset with image paths and labels
+    - ``FolderDataset``: Custom data from folder structure
+    - ``KolektorDataset``: Kolektor surface defect data
+    - ``MPDDDataset``: Metal Parts Defect Detection data
+    - ``MVTecADDataset``: MVTec AD data with industrial objects
+    - ``TabularDataset``: Custom tabular data with image paths and labels
     - ``VAD``: Valeo Anomaly Detection Dataset
-    - ``VisaDataset``: Visual Anomaly dataset
+    - ``VisaDataset``: Visual Anomaly data
 
 Video Datasets:
-    - ``AvenueDataset``: CUHK Avenue dataset for abnormal event detection
-    - ``ShanghaiTechDataset``: ShanghaiTech Campus surveillance dataset
-    - ``UCSDpedDataset``: UCSD Pedestrian dataset for anomaly detection
+    - ``AvenueDataset``: CUHK Avenue data for abnormal event detection
+    - ``ShanghaiTechDataset``: ShanghaiTech Campus surveillance data
+    - ``UCSDpedDataset``: UCSD Pedestrian data for anomaly detection
 
 Example:
     >>> from anomalib.data.datasets import MVTecADDataset
-    >>> dataset = MVTecADDataset(
+    >>> data = MVTecADDataset(
     ...     root="./datasets/MVTec",
     ...     category="bottle",
     ...     split="train"

@@ -3,11 +3,11 @@
 
 """MVTec AD 2 Lightning Data Module.
 
-This module implements a PyTorch Lightning DataModule for the MVTec AD 2 dataset.
-The module handles downloading, loading, and preprocessing of the dataset for
+This module implements a PyTorch Lightning DataModule for the MVTec AD 2 data.
+The module handles downloading, loading, and preprocessing of the data for
 training and evaluation.
 
-The dataset provides three different test sets:
+The data provides three different test sets:
     - Public test set (test_public/): Contains both normal and anomalous samples with ground truth masks
       for facilitating local testing and initial performance estimation
     - Private test set (test_private/): Official unseen test set without ground truth
@@ -20,7 +20,7 @@ are the official test sets for entering the leaderboard on the evaluation server
 (https://benchmark.mvtec.com/).
 
 License:
-    MVTec AD 2 dataset is released under the Creative Commons
+    MVTec AD 2 data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0) https://creativecommons.org/licenses/by-nc-sa/4.0/
 
@@ -44,7 +44,7 @@ from anomalib.data.utils import DownloadInfo, Split, download_and_extract
 
 logger = logging.getLogger(__name__)
 
-# Download information for MVTec AD 2 dataset
+# Download information for MVTec AD 2 data
 DOWNLOAD_INFO = DownloadInfo(
     name="mvtecad2",
     url="https://www.mydrive.ch/shares/121573/7f68fe2c4f7c2ceaa08f463aaeb2f414/download/"
@@ -57,7 +57,7 @@ class MVTecAD2(AnomalibDataModule):
     """MVTec AD 2 Lightning Data Module.
 
     Args:
-        root (str | Path): Path to the dataset root directory.
+        root (str | Path): Path to the data root directory.
             Defaults to ``"./datasets/MVTec_AD_2"``.
         category (str): Name of the MVTec AD 2 category to load.
             Defaults to ``"sheet_metal"``.
@@ -140,14 +140,14 @@ class MVTecAD2(AnomalibDataModule):
         self.test_type = TestType(test_type) if isinstance(test_type, str) else test_type
 
     def prepare_data(self) -> None:
-        """Download the dataset if not available.
+        """Download the data if not available.
 
-        This method checks if the specified dataset is available in the file
-        system. If not, it downloads and extracts the dataset into the
+        This method checks if the specified data is available in the file
+        system. If not, it downloads and extracts the data into the
         appropriate directory.
 
         Example:
-            Assume the dataset is not available on the file system::
+            Assume the data is not available on the file system::
 
                 >>> datamodule = MVTecAD2(
                 ...     root="./datasets/MVTecAD2",
@@ -164,7 +164,7 @@ class MVTecAD2(AnomalibDataModule):
                     └── ...
         """
         if (self.root / self.category).is_dir():
-            logger.info("Found the dataset.")
+            logger.info("Found the data.")
         else:
             download_and_extract(self.root, DOWNLOAD_INFO)
 

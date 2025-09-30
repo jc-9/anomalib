@@ -24,7 +24,7 @@ The library supports:
     - Classification and segmentation tasks
     - One-class, zero-shot, and few-shot learning
     - Multiple input formats (images, videos)
-    - Custom dataset integration
+    - Custom data integration
     - Extensive configuration options
 
 Note:
@@ -38,7 +38,7 @@ __version__ = "2.2.0dev"
 
 
 class LearningType(str, Enum):
-    """Learning type defining how the model learns from the dataset samples.
+    """Learning type defining how the model learns from the data samples.
 
     This enum defines the different learning paradigms supported by anomalib models:
 

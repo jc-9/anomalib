@@ -5,11 +5,11 @@
 
 Description:
     This script provides a PyTorch DataModule for the Kolektor Surface-Defect
-    dataset. The dataset can be accessed at `Kolektor Surface-Defect Dataset
+    data. The data can be accessed at `Kolektor Surface-Defect Dataset
     <https://www.vicos.si/resources/kolektorsdd/>`_.
 
 License:
-    The Kolektor Surface-Defect dataset is released under the Creative Commons
+    The Kolektor Surface-Defect data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0). For more details, visit `Creative Commons License
     <https://creativecommons.org/licenses/by-nc-sa/4.0/>`_.
@@ -43,7 +43,7 @@ class Kolektor(AnomalibDataModule):
     """Kolektor Surface-Defect DataModule.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/kolektor"``.
         train_batch_size (int, optional): Training batch size.
             Defaults to ``32``.
@@ -132,14 +132,14 @@ class Kolektor(AnomalibDataModule):
         )
 
     def prepare_data(self) -> None:
-        """Download the dataset if not available.
+        """Download the data if not available.
 
-        This method checks if the specified dataset is available in the file
-        system. If not, it downloads and extracts the dataset into the
+        This method checks if the specified data is available in the file
+        system. If not, it downloads and extracts the data into the
         appropriate directory.
 
         Example:
-            Assume the dataset is not available on the file system.
+            Assume the data is not available on the file system.
             Here's how the directory structure looks before and after calling
             the ``prepare_data`` method:
 
@@ -171,6 +171,6 @@ class Kolektor(AnomalibDataModule):
                         └── ...
         """
         if (self.root).is_dir():
-            logger.info("Found the dataset.")
+            logger.info("Found the data.")
         else:
             download_and_extract(self.root, DOWNLOAD_INFO)

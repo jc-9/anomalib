@@ -51,7 +51,7 @@ class Datumaro(AnomalibDataModule):
     """Datumaro datamodule.
 
     Args:
-        root (Path | str): Path to the dataset root directory.
+        root (Path | str): Path to the data root directory.
         train_batch_size (int, optional): Training batch size.
             Defaults to ``32``.
         eval_batch_size (int, optional): Test batch size.

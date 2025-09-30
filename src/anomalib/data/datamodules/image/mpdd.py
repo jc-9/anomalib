@@ -3,9 +3,9 @@
 
 """MPDD Data Module.
 
-This module provides a PyTorch Lightning DataModule for the MPDD dataset.
+This module provides a PyTorch Lightning DataModule for the MPDD data.
 
-MPDD is a dataset aimed at benchmarking visual defect detection methods
+MPDD is a data aimed at benchmarking visual defect detection methods
 in industrial metal parts manufacturing. It contains 6 categories of industrial
 objects with both normal and anomalous samples. Each category includes RGB
 images and pixel-level ground truth masks for anomaly segmentation.
@@ -20,11 +20,11 @@ Example:
         ... )
 
 Notes:
-    The dataset should be downloaded manually from OneDrive and placed in the
+    The data should be downloaded manually from OneDrive and placed in the
     appropriate directory. See ``DOWNLOAD_INSTRUCTIONS`` for detailed steps.
 
 License:
-    MPDD dataset is released under the Creative Commons
+    MPDD data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0) https://creativecommons.org/licenses/by-nc-sa/4.0/
 
@@ -53,9 +53,9 @@ class MPDD(AnomalibDataModule):
     """MPDD Datamodule.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/MPDD"``.
-        category (str): Category of the MPDD dataset (e.g. ``"bracket_black"`` or
+        category (str): Category of the MPDD data (e.g. ``"bracket_black"`` or
             ``"bracket_brown"``). Defaults to ``"bracket_black"``.
         train_batch_size (int, optional): Training batch size.
             Defaults to ``32``.
@@ -162,12 +162,12 @@ class MPDD(AnomalibDataModule):
         )
 
     def prepare_data(self) -> None:
-        """Verify that the dataset is available and provide download instructions.
+        """Verify that the data is available and provide download instructions.
 
-        This method checks if the dataset exists in the root directory. If not, it provides
+        This method checks if the data exists in the root directory. If not, it provides
         instructions for downloading from OneDrive.
 
-        The MPDD dataset is available at:
+        The MPDD data is available at:
         https://vutbr-my.sharepoint.com/:f:/g/personal/xjezek16_vutbr_cz/EhHS_ufVigxDo3MC6Lweau0BVMuoCmhMZj6ddamiQ7-FnA?e=oHKCxI
 
         """
@@ -178,19 +178,19 @@ class MPDD(AnomalibDataModule):
 
 
 def get_download_instructions(root_path: Path) -> str:
-    """Get download instructions for the MPDD dataset.
+    """Get download instructions for the MPDD data.
 
     Args:
-        root_path: Path where the dataset should be downloaded.
+        root_path: Path where the data should be downloaded.
 
     Returns:
          str: Formatted download instructions.
     """
     return dedent(f"""
-        MPDD dataset not found in {root_path}
+        MPDD data not found in {root_path}
 
-        The MPDD dataset requires manual download from OneDrive.
-        Follow these steps to download and prepare the dataset:
+        The MPDD data requires manual download from OneDrive.
+        Follow these steps to download and prepare the data:
         -----------------------
         a. Visit https://vutbr-my.sharepoint.com/:f:/g/personal/xjezek16_vutbr_cz/EhHS_ufVigxDo3MC6Lweau0BVMuoCmhMZj6ddamiQ7-FnA?e=oHKCxI
         b. Download all files manually

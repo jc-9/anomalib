@@ -114,7 +114,7 @@ class TileCollater:
     Args:
         tiler (EnsembleTiler): Tiler used to split the images to tiles.
         tile_index (tuple[int, int]): Index of tile we want to return.
-        default_collate_fn (callable): default collate function from dataset
+        default_collate_fn (callable): default collate function from data
     """
 
     def __init__(self, tiler: EnsembleTiler, tile_index: tuple[int, int], default_collate_fn: Callable) -> None:

@@ -305,7 +305,7 @@ class Ganomaly(AnomalibModule):
         super().on_test_batch_end(outputs, batch, batch_idx, dataloader_idx=dataloader_idx)
 
     def _normalize(self, scores: torch.Tensor) -> torch.Tensor:
-        """Normalize the scores based on min/max of entire dataset.
+        """Normalize the scores based on min/max of entire data.
 
         Args:
             scores (torch.Tensor): Un-normalized scores.

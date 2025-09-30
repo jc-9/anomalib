@@ -5,11 +5,11 @@
 
 Description:
     This module provides a PyTorch Dataset implementation for the Kolektor
-    Surface-Defect dataset. The dataset can be accessed at `Kolektor
+    Surface-Defect data. The data can be accessed at `Kolektor
     Surface-Defect Dataset <https://www.vicos.si/resources/kolektorsdd/>`_.
 
 License:
-    The Kolektor Surface-Defect dataset is released under the Creative Commons
+    The Kolektor Surface-Defect data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0). For more details, visit `Creative Commons License
     <https://creativecommons.org/licenses/by-nc-sa/4.0/>`_.
@@ -34,20 +34,20 @@ from anomalib.data.utils import Split, validate_path
 
 
 class KolektorDataset(AnomalibDataset):
-    """Kolektor dataset class.
+    """Kolektor data class.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/kolektor"``.
         transform (Transform | None, optional): Transforms that should be applied
             to the input images. Defaults to ``None``.
-        split (str | Split | None, optional): Split of the dataset, usually
+        split (str | Split | None, optional): Split of the data, usually
             ``Split.TRAIN`` or ``Split.TEST``. Defaults to ``None``.
 
     Example:
         >>> from pathlib import Path
         >>> from anomalib.data.datasets import KolektorDataset
-        >>> dataset = KolektorDataset(
+        >>> data = KolektorDataset(
         ...     root=Path("./datasets/kolektor"),
         ...     split="train"
         ... )
@@ -78,15 +78,15 @@ def make_kolektor_dataset(
     """Create Kolektor samples by parsing the Kolektor data file structure.
 
     The files are expected to follow this structure:
-        - Image files: ``path/to/dataset/item/image_filename.jpg``
-        - Mask files: ``path/to/dataset/item/mask_filename.bmp``
+        - Image files: ``path/to/data/item/image_filename.jpg``
+        - Mask files: ``path/to/data/item/mask_filename.bmp``
 
     Example file paths:
-        - ``path/to/dataset/kos01/Part0.jpg``
-        - ``path/to/dataset/kos01/Part0_label.bmp``
+        - ``path/to/data/kos01/Part0.jpg``
+        - ``path/to/data/kos01/Part0_label.bmp``
 
     This function creates a DataFrame with the following columns:
-        - ``path``: Base path to dataset
+        - ``path``: Base path to data
         - ``item``: Item/component name
         - ``split``: Dataset split (train/test)
         - ``label``: Class label (Good/Bad)
@@ -95,14 +95,14 @@ def make_kolektor_dataset(
         - ``label_index``: Numeric label (0=good, 1=bad)
 
     Args:
-        root (str | Path): Path to the dataset root directory.
+        root (str | Path): Path to the data root directory.
         train_split_ratio (float, optional): Ratio for splitting good images into
             train/test sets. Defaults to ``0.8``.
         split (str | Split | None, optional): Dataset split (train/test).
             Defaults to ``None``.
 
     Returns:
-        DataFrame: DataFrame containing the dataset samples.
+        DataFrame: DataFrame containing the data samples.
 
     Example:
         >>> from pathlib import Path
@@ -179,7 +179,7 @@ def make_kolektor_dataset(
     ):
         msg = """Mismatch between anomalous images and ground truth masks. Make
         sure the mask files follow the same naming convention as the anomalous
-        images in the dataset (e.g. image: 'Part0.jpg', mask:
+        images in the data (e.g. image: 'Part0.jpg', mask:
         'Part0_label.bmp')."""
         raise MisMatchError(msg)
 

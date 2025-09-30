@@ -7,9 +7,9 @@ This module provides PyTorch Dataset implementation for loading images and
 annotations in Datumaro format. Currently only supports annotations exported from
 Intel Geti™.
 
-The dataset expects the following directory structure::
+The data expects the following directory structure::
 
-    dataset/
+    data/
     ├── annotations/
     │    └── default.json
     └── images/
@@ -24,7 +24,7 @@ format.
 Example:
     >>> from pathlib import Path
     >>> from anomalib.data.datasets import DatumaroDataset
-    >>> dataset = DatumaroDataset(
+    >>> data = DatumaroDataset(
     ...     root=Path("./datasets/datumaro"),
     ...     split="train"
     ... )
@@ -44,10 +44,10 @@ def make_datumaro_dataset(
     root: str | Path,
     split: str | Split | None = None,
 ) -> pd.DataFrame:
-    """Create a DataFrame of image samples from a Datumaro dataset.
+    """Create a DataFrame of image samples from a Datumaro data.
 
     Args:
-        root (str | Path): Path to the dataset root directory.
+        root (str | Path): Path to the data root directory.
         split (str | Split | None, optional): Dataset split to load. Usually
             ``Split.TRAIN`` or ``Split.TEST``. Defaults to ``None``.
 
@@ -111,7 +111,7 @@ class DatumaroDataset(AnomalibDataset):
     """Dataset class for loading Datumaro format datasets.
 
     Args:
-        root (str | Path): Path to the dataset root directory.
+        root (str | Path): Path to the data root directory.
         transform (Transform | None, optional): Transforms to apply to the images.
             Defaults to ``None``.
         split (str | Split | None, optional): Dataset split to load. Usually
@@ -121,7 +121,7 @@ class DatumaroDataset(AnomalibDataset):
         >>> from pathlib import Path
         >>> from torchvision.transforms.v2 import Resize
         >>> from anomalib.data.datasets import DatumaroDataset
-        >>> dataset = DatumaroDataset(
+        >>> data = DatumaroDataset(
         ...     root=Path("./datasets/datumaro"),
         ...     transform=Resize((256, 256)),
         ...     split="train"

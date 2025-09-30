@@ -119,8 +119,8 @@ class DummyMetric(AnomalibMetric, _DummyMetric):
 
 @pytest.fixture
 def folder_dataset_path(project_path: Path) -> Path:
-    """Create a dummy folder dataset for testing."""
-    data_path = project_path / "dataset"
+    """Create a dummy folder data for testing."""
+    data_path = project_path / "data"
     dataset_generator = DummyImageDatasetGenerator(
         data_format=ImageDataFormat.FOLDER,
         root=data_path,
@@ -135,7 +135,7 @@ def folder_dataset_path(project_path: Path) -> Path:
 def classification_datamodule(folder_dataset_path: Path) -> AnomalibDataModule:
     """Create a classification datamodule for testing.
 
-    The datamodule is created with a folder dataset, that does not have a mask directory.
+    The datamodule is created with a folder data, that does not have a mask directory.
     """
     # create the folder datamodule
     return Folder(
@@ -153,7 +153,7 @@ def classification_datamodule(folder_dataset_path: Path) -> AnomalibDataModule:
 def segmentation_datamodule(folder_dataset_path: Path) -> AnomalibDataModule:
     """Create a segmentation datamodule for testing.
 
-    The datamodule is created with a folder dataset, that has a mask directory.
+    The datamodule is created with a folder data, that has a mask directory.
     """
     # create the folder datamodule
     return Folder(
@@ -161,7 +161,7 @@ def segmentation_datamodule(folder_dataset_path: Path) -> AnomalibDataModule:
         root=folder_dataset_path,
         normal_dir="good",
         abnormal_dir="bad",
-        mask_dir="masks",  # include masks for segmentation dataset
+        mask_dir="masks",  # include masks for segmentation data
         train_batch_size=1,
         eval_batch_size=1,
         num_workers=0,
@@ -199,7 +199,7 @@ class TestEvaluation:
         classification_datamodule: AnomalibDataModule,
         image_and_pixel_evaluator: Evaluator,
     ) -> None:
-        """Test classification model with classification dataset."""
+        """Test classification model with classification data."""
         model = DummyClassificationModel(evaluator=image_and_pixel_evaluator)
         engine.train(model, datamodule=classification_datamodule)
 
@@ -209,7 +209,7 @@ class TestEvaluation:
         segmentation_datamodule: AnomalibDataModule,
         image_and_pixel_evaluator: Evaluator,
     ) -> None:
-        """Test classification model with segmentation dataset."""
+        """Test classification model with segmentation data."""
         model = DummyClassificationModel(evaluator=image_and_pixel_evaluator)
         engine.train(model, datamodule=segmentation_datamodule)
 
@@ -219,7 +219,7 @@ class TestEvaluation:
         classification_datamodule: AnomalibDataModule,
         image_and_pixel_evaluator: Evaluator,
     ) -> None:
-        """Test segmentation model with classification dataset."""
+        """Test segmentation model with classification data."""
         model = DummySegmentationModel(evaluator=image_and_pixel_evaluator)
         engine.train(model, datamodule=classification_datamodule)
 
@@ -229,7 +229,7 @@ class TestEvaluation:
         segmentation_datamodule: AnomalibDataModule,
         image_and_pixel_evaluator: Evaluator,
     ) -> None:
-        """Test segmentation model with segmentation dataset."""
+        """Test segmentation model with segmentation data."""
         model = DummySegmentationModel(evaluator=image_and_pixel_evaluator)
         engine.train(model, datamodule=segmentation_datamodule)
 
@@ -242,25 +242,25 @@ class TestPostProcessing:
 
     @staticmethod
     def test_cls_model_cls_dataset(engine: Engine, classification_datamodule: AnomalibDataModule) -> None:
-        """Test classification model with classification dataset."""
+        """Test classification model with classification data."""
         model = DummyClassificationModel(post_processor=PostProcessor())
         engine.train(model, datamodule=classification_datamodule)
 
     @staticmethod
     def test_cls_model_seg_dataset(engine: Engine, segmentation_datamodule: AnomalibDataModule) -> None:
-        """Test classification model with segmentation dataset."""
+        """Test classification model with segmentation data."""
         model = DummyClassificationModel(post_processor=PostProcessor())
         engine.train(model, datamodule=segmentation_datamodule)
 
     @staticmethod
     def test_seg_model_cls_dataset(engine: Engine, classification_datamodule: AnomalibDataModule) -> None:
-        """Test segmentation model with classification dataset."""
+        """Test segmentation model with classification data."""
         model = DummySegmentationModel(post_processor=PostProcessor())
         engine.train(model, datamodule=classification_datamodule)
 
     @staticmethod
     def test_seg_model_seg_dataset(engine: Engine, segmentation_datamodule: AnomalibDataModule) -> None:
-        """Test segmentation model with segmentation dataset."""
+        """Test segmentation model with segmentation data."""
         model = DummySegmentationModel(post_processor=PostProcessor())
         engine.train(model, datamodule=segmentation_datamodule)
 
@@ -273,24 +273,24 @@ class TestVisualization:
 
     @staticmethod
     def test_cls_model_cls_dataset(engine: Engine, classification_datamodule: AnomalibDataModule) -> None:
-        """Test classification model with classification dataset."""
+        """Test classification model with classification data."""
         model = DummyClassificationModel(visualizer=ImageVisualizer())
         engine.train(model, datamodule=classification_datamodule)
 
     @staticmethod
     def test_cls_model_seg_dataset(engine: Engine, segmentation_datamodule: AnomalibDataModule) -> None:
-        """Test classification model with segmentation dataset."""
+        """Test classification model with segmentation data."""
         model = DummyClassificationModel(visualizer=ImageVisualizer())
         engine.train(model, datamodule=segmentation_datamodule)
 
     @staticmethod
     def test_seg_model_cls_dataset(engine: Engine, classification_datamodule: AnomalibDataModule) -> None:
-        """Test segmentation model with classification dataset."""
+        """Test segmentation model with classification data."""
         model = DummySegmentationModel(visualizer=ImageVisualizer())
         engine.train(model, datamodule=classification_datamodule)
 
     @staticmethod
     def test_seg_model_seg_dataset(engine: Engine, segmentation_datamodule: AnomalibDataModule) -> None:
-        """Test segmentation model with segmentation dataset."""
+        """Test segmentation model with segmentation data."""
         model = DummySegmentationModel(visualizer=ImageVisualizer())
         engine.train(model, datamodule=segmentation_datamodule)

@@ -69,10 +69,10 @@ class PCA(DynamicBufferMixin):
         self.num_components: torch.Tensor
 
     def fit(self, dataset: torch.Tensor) -> None:
-        """Fit the PCA model to the dataset.
+        """Fit the PCA model to the data.
 
         Args:
-            dataset (torch.Tensor): Input dataset of shape ``(n_samples,
+            dataset (torch.Tensor): Input data of shape ``(n_samples,
                 n_features)``.
 
         Example:
@@ -103,14 +103,14 @@ class PCA(DynamicBufferMixin):
         self.mean = mean
 
     def fit_transform(self, dataset: torch.Tensor) -> torch.Tensor:
-        """Fit the model and transform the input dataset.
+        """Fit the model and transform the input data.
 
         Args:
-            dataset (torch.Tensor): Input dataset of shape ``(n_samples,
+            dataset (torch.Tensor): Input data of shape ``(n_samples,
                 n_features)``.
 
         Returns:
-            torch.Tensor: Transformed dataset of shape ``(n_samples,
+            torch.Tensor: Transformed data of shape ``(n_samples,
                 n_components)``.
 
         Example:

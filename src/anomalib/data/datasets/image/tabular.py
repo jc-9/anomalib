@@ -6,7 +6,7 @@
 This module provides a custom PyTorch Dataset implementation for loading
 images using a selection of paths and labels defined in a table or tabular file.
 It does not require a specific folder structure and allows subsampling and
-relabeling without moving files. The dataset supports both classification and
+relabeling without moving files. The data supports both classification and
 segmentation tasks.
 
 The table should contain columns for ``image_paths``, ``label_index``, ``split``,
@@ -19,7 +19,7 @@ Example:
     ...     "label_index": [LabelName.NORMAL, LabelName.NORMAL, LabelName.ABNORMAL,  ... ],
     ...     "split": [Split.TRAIN, Split.TRAIN, Split.TEST, ... ],
     ... }
-    >>> dataset = TabularDataset(
+    >>> data = TabularDataset(
     ...     name="custom",
     ...     samples=samples,
     ...     root="./datasets/custom",
@@ -40,19 +40,19 @@ class TabularDataset(AnomalibDataset):
     """Dataset class for loading images from paths and labels defined in a table.
 
     Args:
-        name (str): Name of the dataset. Used for logging/saving.
+        name (str): Name of the data. Used for logging/saving.
         samples (dict | list | DataFrame): Pandas ``DataFrame`` or compatible ``list``
-            or ``dict`` containing the dataset information.
+            or ``dict`` containing the data information.
         augmentations (Transform | None, optional): Augmentations to apply to the images.
             Defaults to ``None``.
-        root (str | Path | None, optional): Root directory of the dataset.
+        root (str | Path | None, optional): Root directory of the data.
             Defaults to ``None``.
         split (str | Split | None, optional): Dataset split to load.
             Choose from ``Split.FULL``, ``Split.TRAIN``, ``Split.TEST``.
             Defaults to ``None``.
 
     Examples:
-        Create a classification dataset:
+        Create a classification data:
 
         >>> from anomalib.data.utils import InputNormalizationMethod, get_transforms
         >>> from anomalib.data.datasets import TabularDataset
@@ -65,14 +65,14 @@ class TabularDataset(AnomalibDataset):
         ...     "label_index": [LabelName.NORMAL, LabelName.NORMAL, LabelName.ABNORMAL,  ... ],
         ...     "split": [Split.TRAIN, Split.TRAIN, Split.TEST, ... ],
         ... }
-        >>> dataset = TabularDataset(
+        >>> data = TabularDataset(
         ...     name="custom",
         ...     samples=samples,
         ...     root="./datasets/custom",
         ...     transform=transform
         ... )
 
-        Create a segmentation dataset:
+        Create a segmentation data:
 
         >>> samples = {
         ...     "image_path": ["images/image1.png", "images/image2.png", "images/image3.png", ... ],
@@ -80,7 +80,7 @@ class TabularDataset(AnomalibDataset):
         ...     "split": [Split.TRAIN, Split.TRAIN, Split.TEST, ... ],
         ...     "mask_path": ["masks/mask1.png", "masks/mask2.png", "masks/mask3.png", ... ],
         ... }
-        >>> dataset = TabularDataset(
+        >>> data = TabularDataset(
         ...     name="custom",
         ...     samples=samples,
         ...     root="./datasets/custom",
@@ -109,10 +109,10 @@ class TabularDataset(AnomalibDataset):
 
     @property
     def name(self) -> str:
-        """Get dataset name.
+        """Get data name.
 
         Returns:
-            str: Name of the dataset
+            str: Name of the data
         """
         return self._name
 
@@ -122,12 +122,12 @@ def make_tabular_dataset(
     root: str | Path | None = None,
     split: str | Split | None = None,
 ) -> DataFrame:
-    """Create a dataset from a table of image paths and labels.
+    """Create a data from a table of image paths and labels.
 
     Args:
         samples (dict | list | DataFrame): Pandas ``DataFrame`` or compatible
-            ``list`` or ``dict`` containing the dataset information.
-        root (str | Path | None, optional): Root directory of the dataset.
+            ``list`` or ``dict`` containing the data information.
+        root (str | Path | None, optional): Root directory of the data.
             Defaults to ``None``.
         split (str | Split | None, optional): Dataset split to load.
             Choose from ``Split.FULL``, ``Split.TRAIN``, ``Split.TEST``.
@@ -138,7 +138,7 @@ def make_tabular_dataset(
             and mask paths (for segmentation).
 
     Examples:
-        Create a classification dataset:
+        Create a classification data:
         >>> samples = {
         ...     "image_path": ["images/00.png", "images/01.png", "images/02.png", ... ],
         ...     "label_index": [LabelName.NORMAL, LabelName.NORMAL, LabelName.NORMAL,  ... ],

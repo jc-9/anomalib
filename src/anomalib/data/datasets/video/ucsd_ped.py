@@ -4,10 +4,10 @@
 """UCSD Pedestrian Dataset.
 
 This module provides PyTorch Dataset implementation for the UCSD Pedestrian
-dataset for abnormal event detection. The dataset contains surveillance videos
+data for abnormal event detection. The data contains surveillance videos
 with both normal and abnormal events.
 
-The dataset expects the following directory structure::
+The data expects the following directory structure::
 
     root/
     ├── UCSDped1/
@@ -29,26 +29,26 @@ The dataset expects the following directory structure::
         └── Test/
 
 Example:
-    Create a dataset for training:
+    Create a data for training:
 
     >>> from anomalib.data.datasets import UCSDpedDataset
     >>> from anomalib.data.utils import Split
-    >>> dataset = UCSDpedDataset(
+    >>> data = UCSDpedDataset(
     ...     root="./datasets/ucsdped",
     ...     category="UCSDped1",
     ...     split=Split.TRAIN
     ... )
-    >>> dataset[0].keys()
+    >>> data[0].keys()
     dict_keys(['image', 'video_path', 'frames', 'last_frame', 'original_image'])
 
-    Create a test dataset:
+    Create a test data:
 
-    >>> dataset = UCSDpedDataset(
+    >>> data = UCSDpedDataset(
     ...     root="./datasets/ucsdped",
     ...     category="UCSDped1",
     ...     split=Split.TEST
     ... )
-    >>> dataset[0].keys()
+    >>> data[0].keys()
     dict_keys(['image', 'mask', 'video_path', 'frames', 'last_frame',
     'original_image', 'label'])
 
@@ -83,8 +83,8 @@ class UCSDpedDataset(AnomalibVideoDataset):
     """UCSDped Dataset class.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
-        category (str): Sub-category of the dataset, must be one of ``CATEGORIES``.
+        root (Path | str): Path to the root of the data.
+        category (str): Sub-category of the data, must be one of ``CATEGORIES``.
         split (str | Split | None): Dataset split - usually ``Split.TRAIN`` or
             ``Split.TEST``.
         clip_length_in_frames (int, optional): Number of video frames in each clip.
@@ -100,12 +100,12 @@ class UCSDpedDataset(AnomalibVideoDataset):
     Example:
         >>> from pathlib import Path
         >>> from anomalib.data.datasets import UCSDpedDataset
-        >>> dataset = UCSDpedDataset(
+        >>> data = UCSDpedDataset(
         ...     root=Path("./datasets/ucsdped"),
         ...     category="UCSDped1",
         ...     split="train"
         ... )
-        >>> dataset[0].keys()
+        >>> data[0].keys()
         dict_keys(['image', 'video_path', 'frames', 'last_frame',
         'original_image'])
     """
@@ -134,7 +134,7 @@ class UCSDpedDataset(AnomalibVideoDataset):
 
 
 class UCSDpedClipsIndexer(ClipsIndexer):
-    """Clips class for UCSDped dataset."""
+    """Clips class for UCSDped data."""
 
     def get_mask(self, idx: int) -> np.ndarray | None:
         """Retrieve the masks from the file system.
@@ -198,15 +198,15 @@ class UCSDpedClipsIndexer(ClipsIndexer):
 
 
 def make_ucsd_dataset(path: Path, split: str | Split | None = None) -> DataFrame:
-    """Create UCSD Pedestrian dataset by parsing the file structure.
+    """Create UCSD Pedestrian data by parsing the file structure.
 
     The files are expected to follow the structure::
 
-        path/to/dataset/category/split/video_id/image_filename.tif
-        path/to/dataset/category/split/video_id_gt/mask_filename.bmp
+        path/to/data/category/split/video_id/image_filename.tif
+        path/to/data/category/split/video_id_gt/mask_filename.bmp
 
     Args:
-        path (Path): Path to dataset.
+        path (Path): Path to data.
         split (str | Split | None, optional): Dataset split (ie., either train or
             test). Defaults to ``None``.
 

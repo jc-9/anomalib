@@ -14,7 +14,7 @@ from anomalib.data.dataclasses.generic import BatchIterateMixin
 
 @dataclass
 class DummyDatasetItem:
-    """Dummy dataset item with image and mask."""
+    """Dummy data item with image and mask."""
 
     image: Image
     mask: Mask

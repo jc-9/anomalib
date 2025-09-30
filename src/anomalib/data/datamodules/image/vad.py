@@ -3,8 +3,8 @@
 
 """VAD Data Module.
 
-This module provides a PyTorch Lightning DataModule for the VAD dataset. If
-the dataset is not available locally, it will be downloaded and extracted
+This module provides a PyTorch Lightning DataModule for the VAD data. If
+the data is not available locally, it will be downloaded and extracted
 automatically.
 
 Example:
@@ -17,7 +17,7 @@ Example:
         ... )
 
 Notes:
-    The dataset will be automatically downloaded and converted to the required
+    The data will be automatically downloaded and converted to the required
     format when first used. The directory structure after preparation will be::
 
         datasets/
@@ -25,7 +25,7 @@ Notes:
             └── vad/
 
 License:
-    VAD dataset is released under the Creative Commons
+    VAD data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0).
     https://creativecommons.org/licenses/by-nc-sa/4.0/
@@ -60,9 +60,9 @@ class VAD(AnomalibDataModule):
     """VAD Datamodule.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/VAD"``.
-        category (str): Category of the VAD dataset. Defaults to ``"vad"``.
+        category (str): Category of the VAD data. Defaults to ``"vad"``.
         train_batch_size (int, optional): Training batch size.
             Defaults to ``32``.
         eval_batch_size (int, optional): Test batch size.
@@ -175,14 +175,14 @@ class VAD(AnomalibDataModule):
         )
 
     def prepare_data(self) -> None:
-        """Download the dataset if not available.
+        """Download the data if not available.
 
-        This method checks if the specified dataset is available in the file
-        system. If not, it downloads and extracts the dataset into the
+        This method checks if the specified data is available in the file
+        system. If not, it downloads and extracts the data into the
         appropriate directory.
 
         Example:
-            Assume the dataset is not available on the file system::
+            Assume the data is not available on the file system::
 
                 >>> datamodule = VAD(
                 ...     root="./datasets/VAD",
@@ -197,6 +197,6 @@ class VAD(AnomalibDataModule):
                         └── vad/
         """
         if (self.root / self.category).is_dir():
-            logger.info("Found the dataset.")
+            logger.info("Found the data.")
         else:
             download_and_extract(self.root, DOWNLOAD_INFO)

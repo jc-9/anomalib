@@ -47,7 +47,7 @@ The most common type, supporting RGB images:
 ```python
 from anomalib.data.datasets import MVTecADDataset
 
-# Create MVTecAD dataset
+# Create MVTecAD data
 dataset = MVTecADDataset(
     root="./datasets/MVTecAD",
     category="bottle",
@@ -68,7 +68,7 @@ For video anomaly detection:
 ```python
 from anomalib.data.datasets import Avenue
 
-# Create video dataset
+# Create video data
 dataset = AvenueDataset(
     root="./datasets/avenue",
     split="test",
@@ -88,7 +88,7 @@ For RGB-D or depth-only data:
 ```python
 from anomalib.data.datasets import MVTec3DDataset
 
-# Create depth dataset
+# Create depth data
 dataset = MVTec3DDataset(
     root="./datasets/MVTec3D",
     category="bagel",
@@ -172,7 +172,7 @@ from pathlib import Path
 import pandas as pd
 
 class CustomDataset(AnomalibDataset):
-    """Custom dataset implementation."""
+    """Custom data implementation."""
 
     def __init__(
         self,
@@ -183,7 +183,7 @@ class CustomDataset(AnomalibDataset):
     ):
         super().__init__(transform=transform)
 
-        # Set up dataset
+        # Set up data
         self.root = Path(root)
         self.category = category
         self.split = split
@@ -192,7 +192,7 @@ class CustomDataset(AnomalibDataset):
         self.samples = self._make_dataset()
 
     def _make_dataset(self) -> pd.DataFrame:
-        """Create dataset samples DataFrame."""
+        """Create data samples DataFrame."""
         samples_list = []
 
         # Collect normal samples

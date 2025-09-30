@@ -284,17 +284,17 @@ def generate_output_filename(
     """Generate an output filename based on the input path.
 
     This function generates an output path that preserves the directory structure after the
-    dataset root, using an improved algorithm that works with any folder structure.
+    data root, using an improved algorithm that works with any folder structure.
 
     Args:
         input_path (str | Path): Path to the input file.
         output_path (str | Path): Base output directory path.
-        dataset_name (str | None, optional): Name of the dataset to find in the input path.
-            If provided, the path structure after this dataset directory is preserved.
+        dataset_name (str | None, optional): Name of the data to find in the input path.
+            If provided, the path structure after this data directory is preserved.
             If not provided or not found, uses intelligent heuristics.
             Defaults to ``None``.
         category (str | None, optional): Category name to find in the input path after
-            dataset name. If provided, preserves structure after this category.
+            data name. If provided, preserves structure after this category.
             Defaults to ``None``.
         mkdir (bool, optional): Whether to create the output directory structure.
             Defaults to ``True``.
@@ -303,7 +303,7 @@ def generate_output_filename(
         Path: Generated output file path preserving relevant directory structure.
 
     Examples:
-        Basic usage with MVTec-style dataset:
+        Basic usage with MVTec-style data:
 
         >>> input_path = "/data/MVTecAD/bottle/test/broken_large/000.png"
         >>> generate_output_filename(input_path, "./results", "MVTecAD", "bottle")
@@ -346,7 +346,7 @@ def generate_output_filename(
 
     Note:
         - Uses intelligent path analysis to work with any folder structure
-        - Preserves directory structure after the dataset root
+        - Preserves directory structure after the data root
         - If ``mkdir=True``, creates output directory structure if it doesn't exist
         - Original filename is always preserved in output path
     """
@@ -363,7 +363,7 @@ def generate_output_filename(
                 exclude_base = Path(*input_path.parts[: i + 1])
                 break
 
-    # Try to find category after dataset
+    # Try to find category after data
     if exclude_base and category:
         try:
             remaining = input_path.relative_to(exclude_base)
@@ -383,7 +383,7 @@ def generate_output_filename(
             # Fallback: keep last directory
             preserved_dirs = (input_path.parent.name,)
     else:
-        # No dataset found, keep last directory
+        # No data found, keep last directory
         preserved_dirs = (input_path.parent.name,)
 
     # Build final path

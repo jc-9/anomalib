@@ -4,11 +4,11 @@
 """MVTec 3D-AD Datamodule.
 
 This module provides PyTorch Dataset, Dataloader and PyTorch Lightning DataModule for
-the MVTec 3D-AD dataset. If the dataset is not available locally, it will be
+the MVTec 3D-AD data. If the data is not available locally, it will be
 downloaded and extracted automatically.
 
 License:
-    MVTec 3D-AD dataset is released under the Creative Commons
+    MVTec 3D-AD data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)
     https://creativecommons.org/licenses/by-nc-sa/4.0/
 
@@ -46,10 +46,10 @@ CATEGORIES = (
 
 
 class MVTec3DDataset(AnomalibDepthDataset):
-    """MVTec 3D dataset class.
+    """MVTec 3D data class.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/MVTec3D"``.
         category (str): Category name, e.g. ``"bagel"``.
             Defaults to ``"bagel"``.
@@ -60,7 +60,7 @@ class MVTec3DDataset(AnomalibDepthDataset):
 
     Example:
         >>> from pathlib import Path
-        >>> dataset = MVTec3DDataset(
+        >>> data = MVTec3DDataset(
         ...     root=Path("./datasets/MVTec3D"),
         ...     category="bagel",
         ...     split="train"
@@ -94,8 +94,8 @@ def make_mvtec_3d_dataset(
 
     The files are expected to follow this structure::
 
-        path/to/dataset/split/category/image_filename.png
-        path/to/dataset/ground_truth/category/mask_filename.png
+        path/to/data/split/category/image_filename.png
+        path/to/data/ground_truth/category/mask_filename.png
 
     The function creates a DataFrame with the following format::
 
@@ -106,14 +106,14 @@ def make_mvtec_3d_dataset(
         +---+---------------+-------+---------+---------------+--------------------+
 
     Args:
-        root (Path | str): Path to the dataset root directory.
+        root (Path | str): Path to the data root directory.
         split (str | Split | None, optional): Dataset split (e.g., ``"train"`` or
             ``"test"``). Defaults to ``None``.
         extensions (Sequence[str] | None, optional): List of valid file extensions.
             Defaults to ``None``.
 
     Returns:
-        DataFrame: DataFrame containing the dataset samples.
+        DataFrame: DataFrame containing the data samples.
 
     Example:
         >>> from pathlib import Path

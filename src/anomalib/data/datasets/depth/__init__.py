@@ -3,15 +3,15 @@
 
 """Torch Dataset Implementations of Anomalib Depth Datasets.
 
-This module provides dataset implementations for working with RGB-D (depth) data in
+This module provides data implementations for working with RGB-D (depth) data in
 anomaly detection tasks. The following datasets are available:
 
-- ``Folder3DDataset``: Custom dataset for loading RGB-D data from a folder structure
-- ``MVTec3DDataset``: Implementation of the MVTec 3D-AD dataset
+- ``Folder3DDataset``: Custom data for loading RGB-D data from a folder structure
+- ``MVTec3DDataset``: Implementation of the MVTec 3D-AD data
 
 Example:
     >>> from anomalib.data.datasets import Folder3DDataset
-    >>> dataset = Folder3DDataset(
+    >>> data = Folder3DDataset(
     ...     name="custom",
     ...     root="datasets/custom",
     ...     normal_dir="normal",
@@ -19,7 +19,7 @@ Example:
     ... )
 
     >>> from anomalib.data.datasets import MVTec3DDataset
-    >>> dataset = MVTec3DDataset(
+    >>> data = MVTec3DDataset(
     ...     root="datasets/MVTec3D",
     ...     category="bagel"
     ... )

@@ -3,14 +3,14 @@
 
 """Dataset for performing inference on images.
 
-This module provides a dataset class for loading and preprocessing images for
+This module provides a data class for loading and preprocessing images for
 inference in anomaly detection tasks.
 
 Example:
     >>> from pathlib import Path
     >>> from anomalib.data import PredictDataset
-    >>> dataset = PredictDataset(path="path/to/images")
-    >>> item = dataset[0]
+    >>> data = PredictDataset(path="path/to/images")
+    >>> item = data[0]
     >>> item.image.shape  # doctest: +SKIP
     torch.Size([3, 256, 256])
 """
@@ -38,13 +38,13 @@ class PredictDataset(Dataset):
 
     Examples:
         >>> from pathlib import Path
-        >>> dataset = PredictDataset(
+        >>> data = PredictDataset(
         ...     path=Path("path/to/images"),
         ...     image_size=(224, 224),
         ... )
-        >>> len(dataset)  # doctest: +SKIP
+        >>> len(data)  # doctest: +SKIP
         10
-        >>> item = dataset[0]  # doctest: +SKIP
+        >>> item = data[0]  # doctest: +SKIP
         >>> item.image.shape  # doctest: +SKIP
         torch.Size([3, 224, 224])
     """
@@ -62,10 +62,10 @@ class PredictDataset(Dataset):
         self.image_size = image_size
 
     def __len__(self) -> int:
-        """Get number of images in dataset.
+        """Get number of images in data.
 
         Returns:
-            int: Number of images in the dataset.
+            int: Number of images in the data.
         """
         return len(self.image_filenames)
 

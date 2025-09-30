@@ -81,7 +81,7 @@ class EfficientAd(AnomalibModule):
     EfficientNet backbone for fast and accurate anomaly detection.
 
     Args:
-        imagenet_dir (Path | str): Directory path for the Imagenet dataset.
+        imagenet_dir (Path | str): Directory path for the Imagenet data.
             Defaults to ``"./datasets/imagenette"``.
         teacher_out_channels (int): Number of convolution output channels.
             Defaults to ``384``.
@@ -172,9 +172,9 @@ class EfficientAd(AnomalibModule):
         )
 
     def prepare_imagenette_data(self, image_size: tuple[int, int] | torch.Size) -> None:
-        """Prepare ImageNette dataset transformations.
+        """Prepare ImageNette data transformations.
 
-        Sets up data transforms and downloads ImageNette dataset if not present.
+        Sets up data transforms and downloads ImageNette data if not present.
 
         Args:
             image_size (tuple[int, int] | torch.Size): Target image size for
@@ -200,10 +200,10 @@ class EfficientAd(AnomalibModule):
         """Calculate channel-wise mean and std of teacher model activations.
 
         Computes running mean and standard deviation of teacher model feature maps
-        over the full dataset.
+        over the full data.
 
         Args:
-            dataloader (DataLoader): Dataloader for the dataset.
+            dataloader (DataLoader): Dataloader for the data.
 
         Returns:
             dict[str, torch.Tensor]: Dictionary containing:
@@ -357,7 +357,7 @@ class EfficientAd(AnomalibModule):
         Performs the following steps:
         1. Validates training parameters (batch size=1, no normalization)
         2. Sets up pretrained teacher model
-        3. Prepares ImageNette dataset
+        3. Prepares ImageNette data
         4. Calculates channel statistics
 
         Raises:

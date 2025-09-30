@@ -16,7 +16,7 @@ from anomalib.data import UCSDped
 from anomalib.models import Fuvas
 from anomalib.engine import Engine
 
-# Load the ucsdped dataset, model and engine.
+# Load the ucsdped data, model and engine.
 datamodule = UCSDped()
 model = Fuvas()
 engine = Engine()

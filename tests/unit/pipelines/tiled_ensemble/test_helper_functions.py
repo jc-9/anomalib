@@ -41,7 +41,7 @@ class TestHelperFunctions:
 
         data = datamodule.test_data[0]
 
-        # check that transforms were correctly set to dataset
+        # check that transforms were correctly set to data
         assert list(data.image.shape[1:]) == config["tiling"]["image_size"]
 
     @staticmethod

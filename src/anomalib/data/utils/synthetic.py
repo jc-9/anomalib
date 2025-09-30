@@ -6,14 +6,14 @@
 This module provides functionality to generate synthetic anomalies when real
 anomalous data is scarce or unavailable. It includes:
 
-- A dataset class that generates synthetic anomalies from normal images
+- A data class that generates synthetic anomalies from normal images
 - Functions to convert normal samples into synthetic anomalous samples
 - Perlin noise-based anomaly generation
 - Temporary file management for synthetic data
 
 Example:
     >>> from anomalib.data.utils.synthetic import SyntheticAnomalyDataset
-    >>> # Create synthetic dataset from normal samples
+    >>> # Create synthetic data from normal samples
     >>> synthetic_dataset = SyntheticAnomalyDataset(
     ...     transform=transforms,
     ...     source_samples=normal_samples
@@ -149,25 +149,25 @@ def make_synthetic_dataset(
 class SyntheticAnomalyDataset(AnomalibDataset):
     """Dataset for generating and managing synthetic anomalies.
 
-    The dataset creates synthetic anomalous images by applying Perlin
+    The data creates synthetic anomalous images by applying Perlin
     noise-based perturbations to normal images. The synthetic images are
-    stored in a temporary directory that is cleaned up when the dataset
+    stored in a temporary directory that is cleaned up when the data
     object is deleted.
 
     Args:
         augmentations (Transform | None): Transform object describing the input data augmentations.
         source_samples: DataFrame containing normal samples used as source for
             synthetic anomalies.
-        dataset_name: str dataset name for path of temporary anomalous samples
+        dataset_name: str data name for path of temporary anomalous samples
 
     Example:
         >>> transform = Compose([...])
-        >>> dataset = SyntheticAnomalyDataset(
+        >>> data = SyntheticAnomalyDataset(
         ...     transform=transform,
         ...     source_samples=normal_df,
         ...     dataset_name="synthetic"
         ... )
-        >>> len(dataset)  # 50/50 normal/anomalous split
+        >>> len(data)  # 50/50 normal/anomalous split
         100
     """
 
@@ -203,14 +203,14 @@ class SyntheticAnomalyDataset(AnomalibDataset):
         cls: type["SyntheticAnomalyDataset"],
         dataset: AnomalibDataset,
     ) -> "SyntheticAnomalyDataset":
-        """Create synthetic dataset from existing dataset of normal images.
+        """Create synthetic data from existing data of normal images.
 
         Args:
             dataset: Dataset containing only normal images to convert into a
-                synthetic dataset with 50/50 normal/anomalous split.
+                synthetic data with 50/50 normal/anomalous split.
 
         Returns:
-            New synthetic anomaly dataset.
+            New synthetic anomaly data.
 
         Example:
             >>> normal_dataset = Dataset(...)
@@ -222,7 +222,7 @@ class SyntheticAnomalyDataset(AnomalibDataset):
         """Return shallow copy and prevent cleanup of original.
 
         Returns:
-            Shallow copy of the dataset object.
+            Shallow copy of the data object.
         """
         cls = self.__class__
         new = cls.__new__(cls)
@@ -237,7 +237,7 @@ class SyntheticAnomalyDataset(AnomalibDataset):
             _memo: Memo dictionary used by deepcopy.
 
         Returns:
-            Deep copy of the dataset object.
+            Deep copy of the data object.
         """
         cls = self.__class__
         new = cls.__new__(cls)
@@ -247,6 +247,6 @@ class SyntheticAnomalyDataset(AnomalibDataset):
         return new
 
     def __del__(self) -> None:
-        """Clean up temporary directory when dataset object is deleted."""
+        """Clean up temporary directory when data object is deleted."""
         if self._cleanup:
             shutil.rmtree(self.root)

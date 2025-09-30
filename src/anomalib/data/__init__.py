@@ -123,7 +123,7 @@ def get_datamodule(config: DictConfig | ListConfig | dict) -> AnomalibDataModule
         ... })
         >>> datamodule = get_datamodule(config)
     """
-    logger.info("Loading the datamodule and dataset class from the config.")
+    logger.info("Loading the datamodule and data class from the config.")
 
     # Getting the datamodule class from the config.
     if isinstance(config, dict):

@@ -19,7 +19,7 @@ from anomalib.data import AnomalibDataModule, AnomalibDataset
 
 
 class DummyDataset(AnomalibDataset):
-    """Dummy dataset class for testing."""
+    """Dummy data class for testing."""
 
     def __init__(self) -> None:
         pass

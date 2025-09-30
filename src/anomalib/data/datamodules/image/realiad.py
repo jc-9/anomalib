@@ -3,14 +3,14 @@
 
 """Real-IAD Data Module.
 
-This module provides a PyTorch Lightning DataModule for the Real-IAD dataset.
+This module provides a PyTorch Lightning DataModule for the Real-IAD data.
 
-The Real-IAD dataset is a large-scale industrial anomaly detection dataset containing
+The Real-IAD data is a large-scale industrial anomaly detection data containing
 30 categories of industrial objects with both normal and anomalous samples. Each object
 is captured from 5 different camera viewpoints (C1-C5).
 
 Dataset Structure:
-    The dataset follows this directory structure:
+    The data follows this directory structure:
         Real-IAD/
         ├── realiad_256/      # 256x256 resolution images
         ├── realiad_512/      # 512x512 resolution images
@@ -31,11 +31,11 @@ Example:
         ... )
 
 Notes:
-    The dataset should be downloaded manually from Hugging Face and placed in the
+    The data should be downloaded manually from Hugging Face and placed in the
     appropriate directory. See ``DOWNLOAD_INSTRUCTIONS`` for detailed steps.
 
 License:
-    Real-IAD dataset is released under the Creative Commons
+    Real-IAD data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0).
     https://creativecommons.org/licenses/by-nc-sa/4.0/
@@ -55,9 +55,9 @@ class RealIAD(AnomalibDataModule):
     """Real-IAD Datamodule.
 
     Args:
-        root (Path | str): Path to root directory containing the dataset.
+        root (Path | str): Path to root directory containing the data.
             Defaults to ``"./datasets/Real-IAD"``.
-        category (str): Category of the Real-IAD dataset (e.g. ``"audiojack"`` or
+        category (str): Category of the Real-IAD data (e.g. ``"audiojack"`` or
             ``"button_battery"``). Defaults to ``"audiojack"``.
         resolution (str | int): Image resolution to use (e.g. ``"256"``, ``"512"``,
             ``"1024"``, ``"raw"`` or their integer equivalents).
@@ -145,10 +145,10 @@ class RealIAD(AnomalibDataModule):
             ... )
 
     Notes:
-        - The dataset contains both normal (OK) and anomalous (NG) samples
+        - The data contains both normal (OK) and anomalous (NG) samples
         - Each object is captured from 5 different camera viewpoints (C1-C5)
         - Images are available in multiple resolutions (256x256, 512x512, 1024x1024)
-        - JSON metadata files provide additional information and different dataset splits
+        - JSON metadata files provide additional information and different data splits
         - Segmentation masks are provided for anomalous samples
     """
 
@@ -194,26 +194,26 @@ class RealIAD(AnomalibDataModule):
 
         # Validate inputs
         if category not in CATEGORIES:
-            msg = f"Category {category} not found in Real-IAD dataset. Available categories: {CATEGORIES}"
+            msg = f"Category {category} not found in Real-IAD data. Available categories: {CATEGORIES}"
             raise ValueError(msg)
 
         if resolution not in RESOLUTIONS:
-            msg = f"Resolution {resolution} not found in Real-IAD dataset. Available resolutions: {RESOLUTIONS}"
+            msg = f"Resolution {resolution} not found in Real-IAD data. Available resolutions: {RESOLUTIONS}"
             raise ValueError(msg)
 
     def prepare_data(self) -> None:
-        """Verify that the dataset is available and provide download instructions.
+        """Verify that the data is available and provide download instructions.
 
-        This method checks if the dataset exists in the root directory. If not, it provides
+        This method checks if the data exists in the root directory. If not, it provides
         instructions for requesting access and downloading from Hugging Face.
 
-        The Real-IAD dataset is available at:
+        The Real-IAD data is available at:
         https://huggingface.co/datasets/REAL-IAD/Real-IAD
 
         Note:
-            The dataset requires approval from the authors. You need to:
+            The data requires approval from the authors. You need to:
             1. Create a Hugging Face account
-            2. Request access to the dataset
+            2. Request access to the data
             3. Wait for approval
             4. Download and extract to the root directory
         """
@@ -249,24 +249,24 @@ class RealIAD(AnomalibDataModule):
 
 
 def get_download_instructions(root_path: Path) -> str:
-    """Get download instructions for the Real-IAD dataset.
+    """Get download instructions for the Real-IAD data.
 
     Args:
-        root_path: Path where the dataset should be downloaded.
+        root_path: Path where the data should be downloaded.
 
     Returns:
         str: Formatted download instructions.
     """
     return dedent(f"""
-        Real-IAD dataset not found in {root_path}
+        Real-IAD data not found in {root_path}
 
-        The Real-IAD dataset requires approval from the authors. To get access:
+        The Real-IAD data requires approval from the authors. To get access:
 
         1. Create a Hugging Face account at https://huggingface.co
         2. Visit https://huggingface.co/datasets/REAL-IAD/Real-IAD
         3. Click "Access Repository" and fill out the form
-        4. Wait for approval from the dataset authors
-        5. Once approved, you have two options to download the dataset:
+        4. Wait for approval from the data authors
+        5. Once approved, you have two options to download the data:
 
         Option 1: Using Hugging Face CLI (Recommended)
         --------------------------------------------
@@ -276,9 +276,9 @@ def get_download_instructions(root_path: Path) -> str:
         b. Login to Hugging Face:
            huggingface-cli login
 
-        c. Download the dataset:
+        c. Download the data:
            huggingface-cli download \
-               --repo-type dataset \
+               --repo-type data \
                --local-dir {root_path} REAL-IAD/Real-IAD \
                --include="*" \
                --token YOUR_HF_TOKEN
@@ -305,7 +305,7 @@ def get_download_instructions(root_path: Path) -> str:
         Note: Replace YOUR_HF_TOKEN with your Hugging Face access token.
               To get your token, visit: https://huggingface.co/settings/tokens
 
-        For more information about the dataset, see:
+        For more information about the data, see:
         - Paper: https://arxiv.org/abs/2401.02749
         - Code: https://github.com/REAL-IAD/REAL-IAD
         - Dataset: https://huggingface.co/datasets/REAL-IAD/Real-IAD

@@ -47,7 +47,7 @@ class TiledEnsembleEngine(Engine):
             Path: path to new workspace root dir
         """
         model_name = args["TrainModels"]["model"]["class_path"].split(".")[-1]
-        # get dataset name if present in init_args
+        # get data name if present in init_args
         dataset_name = args["data"]["init_args"].get("name", None)
         if dataset_name is None:
             # if not specified, take class name

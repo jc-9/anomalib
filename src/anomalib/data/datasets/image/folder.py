@@ -4,7 +4,7 @@
 """Custom Folder Dataset.
 
 This module provides a custom PyTorch Dataset implementation for loading images
-from a folder structure. The dataset supports both classification and
+from a folder structure. The data supports both classification and
 segmentation tasks.
 
 The folder structure should contain normal images and optionally abnormal images,
@@ -13,7 +13,7 @@ test images, and mask annotations.
 Example:
     >>> from pathlib import Path
     >>> from anomalib.data.datasets import FolderDataset
-    >>> dataset = FolderDataset(
+    >>> data = FolderDataset(
     ...     name="custom",
     ...     root="datasets/custom",
     ...     normal_dir="normal",
@@ -38,12 +38,12 @@ class FolderDataset(AnomalibDataset):
     """Dataset class for loading images from a custom folder structure.
 
     Args:
-        name (str): Name of the dataset. Used for logging/saving.
+        name (str): Name of the data. Used for logging/saving.
         normal_dir (str | Path | Sequence): Path to directory containing normal
             images.
         transform (Transform | None, optional): Transforms to apply to the images.
             Defaults to ``None``.
-        root (str | Path | None, optional): Root directory of the dataset.
+        root (str | Path | None, optional): Root directory of the data.
             Defaults to ``None``.
         abnormal_dir (str | Path | Sequence | None, optional): Path to directory
             containing abnormal images. Defaults to ``None``.
@@ -60,14 +60,14 @@ class FolderDataset(AnomalibDataset):
             include. Defaults to ``None``.
 
     Examples:
-        Create a classification dataset:
+        Create a classification data:
 
         >>> from anomalib.data.utils import InputNormalizationMethod, get_transforms
         >>> transform = get_transforms(
         ...     image_size=256,
         ...     normalization=InputNormalizationMethod.NONE
         ... )
-        >>> dataset = FolderDataset(
+        >>> data = FolderDataset(
         ...     name="custom",
         ...     normal_dir="datasets/custom/good",
         ...     abnormal_dir="datasets/custom/defect",
@@ -75,9 +75,9 @@ class FolderDataset(AnomalibDataset):
         ...     transform=transform
         ... )
 
-        Create a segmentation dataset:
+        Create a segmentation data:
 
-        >>> dataset = FolderDataset(
+        >>> data = FolderDataset(
         ...     name="custom",
         ...     normal_dir="datasets/custom/good",
         ...     abnormal_dir="datasets/custom/defect",
@@ -121,10 +121,10 @@ class FolderDataset(AnomalibDataset):
 
     @property
     def name(self) -> str:
-        """Get dataset name.
+        """Get data name.
 
         Returns:
-            str: Name of the dataset
+            str: Name of the data
         """
         return self._name
 
@@ -138,12 +138,12 @@ def make_folder_dataset(
     split: str | Split | None = None,
     extensions: tuple[str, ...] | None = None,
 ) -> DataFrame:
-    """Create a dataset from a folder structure.
+    """Create a data from a folder structure.
 
     Args:
         normal_dir (str | Path | Sequence): Path to directory containing normal
             images.
-        root (str | Path | None, optional): Root directory of the dataset.
+        root (str | Path | None, optional): Root directory of the data.
             Defaults to ``None``.
         abnormal_dir (str | Path | Sequence | None, optional): Path to directory
             containing abnormal images. Defaults to ``None``.
@@ -164,7 +164,7 @@ def make_folder_dataset(
             and mask paths (for segmentation).
 
     Examples:
-        Create a classification dataset:
+        Create a classification data:
 
         >>> folder_df = make_folder_dataset(
         ...     normal_dir="datasets/custom/good",
@@ -255,7 +255,7 @@ def make_folder_dataset(
         ):
             msg = """Mismatch between anomalous images and mask images. Make sure
                 the mask files folder follow the same naming convention as the
-                anomalous images in the dataset (e.g. image: '000.png',
+                anomalous images in the data (e.g. image: '000.png',
                 mask: '000.png')."""
             raise MisMatchError(msg)
 

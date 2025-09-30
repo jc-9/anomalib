@@ -60,7 +60,7 @@ class SingleClassGaussian(DynamicBufferMixin):
         self.sigma_mat: torch.Tensor
 
     def fit(self, dataset: torch.Tensor) -> None:
-        """Fit a Gaussian model to dataset X.
+        """Fit a Gaussian model to data X.
 
         Covariance matrix is not calculated directly using ``C = X.X^T``.
         Instead, it is represented using SVD of X: ``X = U.S.V^T``.
@@ -68,7 +68,7 @@ class SingleClassGaussian(DynamicBufferMixin):
         log-likelihood without requiring full matrix inversion.
 
         Args:
-            dataset (torch.Tensor): Input dataset to fit the model with shape
+            dataset (torch.Tensor): Input data to fit the model with shape
                 ``(n_features, n_samples)``.
         """
         num_samples = dataset.shape[1]
@@ -90,12 +90,12 @@ class SingleClassGaussian(DynamicBufferMixin):
         return torch.sum(features_transformed * features_transformed, dim=1) + 2 * torch.sum(torch.log(self.sigma_mat))
 
     def forward(self, dataset: torch.Tensor) -> None:
-        """Fit the model to the input dataset.
+        """Fit the model to the input data.
 
-        Transforms the input dataset based on singular values calculated earlier.
+        Transforms the input data based on singular values calculated earlier.
 
         Args:
-            dataset (torch.Tensor): Input dataset with shape
+            dataset (torch.Tensor): Input data with shape
                 ``(n_features, n_samples)``.
         """
         self.fit(dataset)
@@ -156,7 +156,7 @@ class DFMModel(nn.Module):
         self.memory_bank: list[torch.tensor] = []
 
     def fit(self) -> None:
-        """Fit PCA and Gaussian model to dataset."""
+        """Fit PCA and Gaussian model to data."""
         self.memory_bank = torch.vstack(self.memory_bank)
         self.pca_model.fit(self.memory_bank)
         if self.score_type == "nll":

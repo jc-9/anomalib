@@ -5,7 +5,7 @@
 
 # Using MVTecAD Dataset with Anomalib CLI
 # -----------------------------------
-# This example shows different ways to use the MVTecAD dataset.
+# This example shows different ways to use the MVTecAD data.
 
 # 1. Basic Usage
 # Train on a specific MVTecAD category

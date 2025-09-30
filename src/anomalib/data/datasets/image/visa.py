@@ -4,15 +4,15 @@
 """Visual Anomaly (VisA) Dataset.
 
 This module provides PyTorch Dataset implementation for the Visual Anomaly (VisA)
-dataset. The dataset will be downloaded and extracted automatically if not found
+data. The data will be downloaded and extracted automatically if not found
 locally.
 
-The dataset contains 12 categories of industrial objects with both normal and
+The data contains 12 categories of industrial objects with both normal and
 anomalous samples. Each category includes RGB images and pixel-level ground truth
 masks for anomaly segmentation.
 
 License:
-    The VisA dataset is released under the Creative Commons
+    The VisA data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0) https://creativecommons.org/licenses/by-nc-sa/4.0/
 
@@ -49,13 +49,13 @@ CATEGORIES = (
 
 
 class VisaDataset(AnomalibDataset):
-    """VisA dataset class.
+    """VisA data class.
 
-    Dataset class for loading and processing Visual Anomaly (VisA) dataset images.
+    Dataset class for loading and processing Visual Anomaly (VisA) data images.
     Supports both classification and segmentation tasks.
 
     Args:
-        root (str | Path): Path to root directory containing the dataset.
+        root (str | Path): Path to root directory containing the data.
         category (str): Category name, must be one of ``CATEGORIES``.
         transform (Transform | None, optional): Transforms to apply to the images.
             Defaults to ``None``.
@@ -65,12 +65,12 @@ class VisaDataset(AnomalibDataset):
     Example:
         >>> from pathlib import Path
         >>> from anomalib.data.datasets import VisaDataset
-        >>> dataset = VisaDataset(
+        >>> data = VisaDataset(
         ...     root=Path("./datasets/visa"),
         ...     category="candle",
         ...     split="train"
         ... )
-        >>> item = dataset[0]
+        >>> item = data[0]
         >>> item.keys()
         dict_keys(['image_path', 'label', 'image', 'mask'])
     """

@@ -13,10 +13,10 @@ from anomalib.deploy import ExportType
 from anomalib.engine import Engine
 from anomalib.models import Patchcore
 
-# 2. Create a dataset
-# MVTecAD is a popular dataset for anomaly detection
+# 2. Create a data
+# MVTecAD is a popular data for anomaly detection
 datamodule = MVTecAD(
-    root="./datasets/MVTecAD",  # Path to download/store the dataset
+    root="./datasets/MVTecAD",  # Path to download/store the data
     category="bottle",  # MVTec category to use
     train_batch_size=32,  # Number of images per training batch
     eval_batch_size=32,  # Number of images per validation/test batch

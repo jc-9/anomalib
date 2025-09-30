@@ -3,15 +3,15 @@
 
 """MVTec AD Dataset.
 
-This module provides PyTorch Dataset implementation for the MVTec AD dataset. The
-dataset will be downloaded and extracted automatically if not found locally.
+This module provides PyTorch Dataset implementation for the MVTec AD data. The
+data will be downloaded and extracted automatically if not found locally.
 
-The dataset contains 15 categories of industrial objects with both normal and
+The data contains 15 categories of industrial objects with both normal and
 anomalous samples. Each category includes RGB images and pixel-level ground truth
 masks for anomaly segmentation.
 
 License:
-    MVTec AD dataset is released under the Creative Commons
+    MVTec AD data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0) https://creativecommons.org/licenses/by-nc-sa/4.0/
 
@@ -59,13 +59,13 @@ CATEGORIES = (
 
 
 class MVTecADDataset(AnomalibDataset):
-    """MVTec AD dataset class.
+    """MVTec AD data class.
 
-    Dataset class for loading and processing MVTec AD dataset images. Supports
+    Dataset class for loading and processing MVTec AD data images. Supports
     both classification and segmentation tasks.
 
     Args:
-        root (Path | str): Path to root directory containing the dataset.
+        root (Path | str): Path to root directory containing the data.
             Defaults to ``"./datasets/MVTecAD"``.
         category (str): Category name, must be one of ``CATEGORIES``.
             Defaults to ``"bottle"``.
@@ -77,7 +77,7 @@ class MVTecADDataset(AnomalibDataset):
     Example:
         >>> from pathlib import Path
         >>> from anomalib.data.datasets import MVTecADDataset
-        >>> dataset = MVTecADDataset(
+        >>> data = MVTecADDataset(
         ...     root=Path("./datasets/MVTecAD"),
         ...     category="bottle",
         ...     split="train"
@@ -85,14 +85,14 @@ class MVTecADDataset(AnomalibDataset):
 
         For classification tasks, each sample contains:
 
-        >>> sample = dataset[0]
+        >>> sample = data[0]
         >>> list(sample.keys())
         ['image_path', 'label', 'image']
 
         For segmentation tasks, samples also include mask paths and masks:
 
-        >>> dataset.task = "segmentation"
-        >>> sample = dataset[0]
+        >>> data.task = "segmentation"
+        >>> sample = data[0]
         >>> list(sample.keys())
         ['image_path', 'label', 'image', 'mask_path', 'mask']
 
@@ -130,11 +130,11 @@ def make_mvtec_ad_dataset(
     """Create MVTec AD samples by parsing the data directory structure.
 
     The files are expected to follow the structure:
-        ``path/to/dataset/split/category/image_filename.png``
-        ``path/to/dataset/ground_truth/category/mask_filename.png``
+        ``path/to/data/split/category/image_filename.png``
+        ``path/to/data/ground_truth/category/mask_filename.png``
 
     Args:
-        root (Path | str): Path to dataset root directory
+        root (Path | str): Path to data root directory
         split (str | Split | None, optional): Dataset split (train or test)
             Defaults to ``None``.
         extensions (Sequence[str] | None, optional): Valid file extensions
@@ -142,7 +142,7 @@ def make_mvtec_ad_dataset(
 
     Returns:
         DataFrame: Dataset samples with columns:
-            - path: Base path to dataset
+            - path: Base path to data
             - split: Dataset split (train/test)
             - label: Class label
             - image_path: Path to image file
@@ -225,7 +225,7 @@ def make_mvtec_ad_dataset(
 
 @deprecate(since="2.1.0", remove="2.3.0", use="MVTecADDataset")
 class MVTecDataset(MVTecADDataset):
-    """MVTec dataset class (Deprecated).
+    """MVTec data class (Deprecated).
 
     This class is deprecated and will be removed in a future version.
     Please use MVTecADDataset instead.

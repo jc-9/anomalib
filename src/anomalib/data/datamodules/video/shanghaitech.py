@@ -4,7 +4,7 @@
 """ShanghaiTech Campus Data Module.
 
 This module provides a PyTorch Lightning DataModule for the ShanghaiTech Campus
-dataset. If the dataset is not available locally, it will be downloaded and
+data. If the data is not available locally, it will be downloaded and
 extracted automatically. The video files are also converted to a format readable
 by pyav.
 
@@ -70,7 +70,7 @@ class ShanghaiTech(AnomalibVideoDataModule):
     """ShanghaiTech DataModule class.
 
     Args:
-        root (Path | str): Path to the root directory of the dataset.
+        root (Path | str): Path to the root directory of the data.
             Defaults to ``"./datasets/shanghaitech"``.
         scene (int): Scene index in range [1, 13].
             Defaults to ``1``.
@@ -163,10 +163,10 @@ class ShanghaiTech(AnomalibVideoDataModule):
         )
 
     def prepare_data(self) -> None:
-        """Download the dataset and convert video files."""
+        """Download the data and convert video files."""
         training_root = self.root / "training"
         if training_root.is_dir():
-            logger.info("Found the dataset.")
+            logger.info("Found the data.")
         else:
             download_and_extract(self.root, DATASET_DOWNLOAD_INFO)
 
@@ -188,7 +188,7 @@ class ShanghaiTech(AnomalibVideoDataModule):
     def _convert_training_videos(video_folder: Path, target_folder: Path) -> None:
         """Re-code training videos for correct frame reading by torchvision.
 
-        The encoding of the raw video files in the ShanghaiTech dataset causes
+        The encoding of the raw video files in the ShanghaiTech data causes
         issues when reading frames using pyav. To prevent this, frames are read
         using opencv and written to new video files that can be parsed correctly
         with pyav.

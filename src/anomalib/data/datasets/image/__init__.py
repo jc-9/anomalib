@@ -3,22 +3,22 @@
 
 """PyTorch Dataset implementations for anomaly detection in images.
 
-This module provides dataset implementations for various image anomaly detection
+This module provides data implementations for various image anomaly detection
 datasets:
 
-- ``BTechDataset``: BTech dataset containing industrial objects
+- ``BTechDataset``: BTech data containing industrial objects
 - ``DatumaroDataset``: Dataset in Datumaro format (Intel Geti™ export)
-- ``FolderDataset``: Custom dataset from folder structure
-- ``KolektorDataset``: Kolektor surface defect dataset
-- ``MVTecADDataset``: MVTec AD dataset with industrial objects
-- ``MVTecLOCODataset``: MVTec LOCO dataset with logical and structural anomalies
-- ``TabularDataset``: Custom tabular dataset with image paths and labels
+- ``FolderDataset``: Custom data from folder structure
+- ``KolektorDataset``: Kolektor surface defect data
+- ``MVTecADDataset``: MVTec AD data with industrial objects
+- ``MVTecLOCODataset``: MVTec LOCO data with logical and structural anomalies
+- ``TabularDataset``: Custom tabular data with image paths and labels
 - ``VAD``: Valeo Anomaly Detection Dataset
-- ``VisaDataset``: Visual Anomaly dataset
+- ``VisaDataset``: Visual Anomaly data
 
 Example:
     >>> from anomalib.data.datasets import MVTecADDataset
-    >>> dataset = MVTecADDataset(
+    >>> data = MVTecADDataset(
     ...     root="./datasets/MVTec",
     ...     category="bottle",
     ...     split="train"

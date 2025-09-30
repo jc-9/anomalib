@@ -147,7 +147,7 @@ class Dfm(MemoryBankMixin, AnomalibModule):
         The method aggregates embeddings collected during training and fits
         both the PCA transformation and Gaussian model used for scoring.
         """
-        logger.info("Fitting a PCA and a Gaussian model to dataset.")
+        logger.info("Fitting a PCA and a Gaussian model to data.")
         self.model.fit()
 
     def validation_step(self, batch: Batch, *args, **kwargs) -> STEP_OUTPUT:

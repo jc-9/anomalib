@@ -3,8 +3,8 @@
 
 """MVTec 3D-AD Datamodule.
 
-This module provides a PyTorch Lightning DataModule for the MVTec 3D-AD dataset.
-The dataset contains RGB and depth image pairs for anomaly detection tasks.
+This module provides a PyTorch Lightning DataModule for the MVTec 3D-AD data.
+The data contains RGB and depth image pairs for anomaly detection tasks.
 
 Example:
     Create a MVTec3D datamodule::
@@ -16,7 +16,7 @@ Example:
         ... )
 
 License:
-    MVTec 3D-AD dataset is released under the Creative Commons
+    MVTec 3D-AD data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0).
     https://creativecommons.org/licenses/by-nc-sa/4.0/
@@ -54,9 +54,9 @@ class MVTec3D(AnomalibDataModule):
     """MVTec 3D-AD Datamodule.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/MVTec3D"``.
-        category (str): Category of the MVTec3D dataset (e.g. ``"bottle"`` or
+        category (str): Category of the MVTec3D data (e.g. ``"bottle"`` or
             ``"cable"``). Defaults to ``"bagel"``.
         train_batch_size (int, optional): Training batch size.
             Defaults to ``32``.
@@ -138,8 +138,8 @@ class MVTec3D(AnomalibDataModule):
         )
 
     def prepare_data(self) -> None:
-        """Download the dataset if not available."""
+        """Download the data if not available."""
         if (self.root / self.category).is_dir():
-            logger.info("Found the dataset.")
+            logger.info("Found the data.")
         else:
             download_and_extract(self.root, DOWNLOAD_INFO)

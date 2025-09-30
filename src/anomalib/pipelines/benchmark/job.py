@@ -4,7 +4,7 @@
 """Benchmarking job for evaluating model performance.
 
 This module provides functionality for running individual benchmarking jobs that
-evaluate model performance on specific datasets. Each job runs a model on a dataset
+evaluate model performance on specific datasets. Each job runs a model on a data
 and collects performance metrics.
 
 Example:
@@ -28,7 +28,7 @@ Example:
 
 The job executes model training and evaluation, collecting metrics like accuracy,
 F1-score, and inference time. Results are returned in a standardized format for
-comparison across different model-dataset combinations.
+comparison across different model-data combinations.
 """
 
 import logging
@@ -56,14 +56,14 @@ class BenchmarkJob(Job):
     """Benchmarking job for evaluating anomaly detection models.
 
     This class implements a benchmarking job that evaluates model performance by
-    training and testing on a given dataset. It collects metrics like accuracy,
+    training and testing on a given data. It collects metrics like accuracy,
     F1-score, and timing information.
 
     Args:
         accelerator (str): Type of accelerator to use for computation (e.g.
             ``"cpu"``, ``"gpu"``).
         model (AnomalibModule): Anomaly detection model instance to benchmark.
-        datamodule (AnomalibDataModule): Data module providing the dataset.
+        datamodule (AnomalibDataModule): Data module providing the data.
         seed (int): Random seed for reproducibility.
         flat_cfg (dict): Flattened configuration dictionary with dotted keys.
 
@@ -88,7 +88,7 @@ class BenchmarkJob(Job):
 
     The job executes model training and evaluation, collecting metrics like
     accuracy, F1-score, and inference time. Results are returned in a standardized
-    format for comparison across different model-dataset combinations.
+    format for comparison across different model-data combinations.
     """
 
     name = "benchmark"

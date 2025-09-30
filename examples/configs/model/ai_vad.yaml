@@ -1,4 +1,4 @@
-# NOTE: To get correct results, set the image size to (240, 360) and normalization to none in the dataset
+# NOTE: To get correct results, set the image size to (240, 360) and normalization to none in the data
 
 model:
   class_path: anomalib.models.AiVad

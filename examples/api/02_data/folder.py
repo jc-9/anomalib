@@ -1,9 +1,9 @@
 # Copyright (C) 2024 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""Example showing how to use your own dataset with Anomalib.
+"""Example showing how to use your own data with Anomalib.
 
-This example demonstrates how to use a custom folder dataset where images
+This example demonstrates how to use a custom folder data where images
 are organized in a specific directory structure.
 """
 

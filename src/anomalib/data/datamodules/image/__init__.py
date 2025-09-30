@@ -14,12 +14,12 @@ anomaly detection. The following data modules are available:
 - ``MVTecAD``: MVTec Anomaly Detection Dataset
 - ``MVTecAD2``: MVTec Anomaly Detection Dataset 2
 - ``MVTecLOCO``: MVTec LOCO Dataset with logical and structural anomalies
-- ``Tabular``: Custom tabular dataset with image paths and labels
+- ``Tabular``: Custom tabular data with image paths and labels
 - ``VAD``: Valeo Anomaly Detection Dataset
 - ``Visa``: Visual Anomaly Dataset
 
 Example:
-    Load the MVTec AD dataset::
+    Load the MVTec AD data::
 
         >>> from anomalib.data import MVTecAD
         >>> datamodule = MVTecAD(
@@ -47,7 +47,7 @@ from .visa import Visa
 class ImageDataFormat(str, Enum):
     """Supported Image Dataset Types.
 
-        The following dataset formats are supported:
+        The following data formats are supported:
 
     - ``BTECH``: BTech Surface Defect Dataset
     - ``DATUMARO``: Dataset in Datumaro format

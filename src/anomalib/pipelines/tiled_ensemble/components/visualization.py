@@ -78,7 +78,7 @@ class VisualizationJob(Job):
                 )
 
                 if image is not None:
-                    # Get the dataset name and category to save the image
+                    # Get the data name and category to save the image
                     filename = generate_output_filename(
                         input_path=item.image_path or "",
                         output_path=self.root_dir,

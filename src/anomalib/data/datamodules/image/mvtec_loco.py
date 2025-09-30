@@ -3,12 +3,12 @@
 
 """MVTec LOCO Data Module.
 
-This module provides a PyTorch Lightning DataModule for the MVTec LOCO dataset. The
-dataset contains 5 categories of industrial objects with both normal and
+This module provides a PyTorch Lightning DataModule for the MVTec LOCO data. The
+data contains 5 categories of industrial objects with both normal and
 anomalous samples. Each category includes RGB images and pixel-level ground truth
 masks for anomaly segmentation.
 
-The dataset distinguishes between structural anomalies (local defects) and
+The data distinguishes between structural anomalies (local defects) and
 logical anomalies (global defects).
 
 Example:
@@ -21,7 +21,7 @@ Example:
         ... )
 
 Notes:
-    The dataset will be automatically downloaded and converted to the required
+    The data will be automatically downloaded and converted to the required
     format when first used. The directory structure after preparation will be::
 
         datasets/
@@ -31,7 +31,7 @@ Notes:
             └── ...
 
 License:
-    MVTec LOCO dataset is released under the Creative Commons
+    MVTec LOCO data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0).
     https://creativecommons.org/licenses/by-nc-sa/4.0/
@@ -59,9 +59,9 @@ class MVTecLOCO(AnomalibDataModule):
     """MVTec LOCO Datamodule.
 
     Args:
-        root (Path | str): Path to the root of the dataset.
+        root (Path | str): Path to the root of the data.
             Defaults to ``"./datasets/MVTec_LOCO"``.
-        category (str): Category of the MVTec LOCO dataset (e.g. ``"breakfast_box"`` or
+        category (str): Category of the MVTec LOCO data (e.g. ``"breakfast_box"`` or
             ``"juice_bottle"``). Defaults to ``"breakfast_box"``.
         train_batch_size (int, optional): Training batch size.
             Defaults to ``32``.

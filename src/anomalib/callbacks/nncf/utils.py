@@ -44,8 +44,8 @@ class InitLoader:
 
         >>> from torch.utils.data import DataLoader, TensorDataset
         >>> import torch
-        >>> dataset = TensorDataset(torch.randn(10, 3, 32, 32))
-        >>> dataloader = DataLoader(dataset)
+        >>> data = TensorDataset(torch.randn(10, 3, 32, 32))
+        >>> dataloader = DataLoader(data)
         >>> init_loader = InitLoader(dataloader)
 
         Iterate through the loader:

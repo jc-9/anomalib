@@ -38,7 +38,7 @@ class BenchmarkJobGenerator(JobGenerator):
     """Generate benchmark jobs for evaluating model performance.
 
     This class generates benchmark jobs based on provided configurations for models,
-    datasets and other parameters. Each job evaluates a specific model-dataset
+    datasets and other parameters. Each job evaluates a specific model-data
     combination.
 
     Args:
@@ -78,7 +78,7 @@ class BenchmarkJobGenerator(JobGenerator):
 
         Args:
             args (dict): Dictionary containing job configuration including model,
-                dataset and other parameters.
+                data and other parameters.
             previous_stage_result (PREV_STAGE_RESULT): Results from previous pipeline
                 stage (unused).
 

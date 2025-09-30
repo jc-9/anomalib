@@ -56,7 +56,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install Tox
         run: pip install tox
-      - name: Link the dataset path to the dataset directory in the repository root.
+      - name: Link the data path to the data directory in the repository root.
         run: |
           ln -s $ANOMALIB_DATASET_PATH ./datasets
           ln -s $ANOMALIB_DATASET_PATH ./examples/notebooks/datasets

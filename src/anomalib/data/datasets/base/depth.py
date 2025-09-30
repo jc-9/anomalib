@@ -3,7 +3,7 @@
 
 """Base Depth Dataset.
 
-This module implements the base depth dataset class for anomaly detection tasks that
+This module implements the base depth data class for anomaly detection tasks that
 use RGB-D (RGB + Depth) data.
 """
 
@@ -24,7 +24,7 @@ from .image import AnomalibDataset
 
 
 class AnomalibDepthDataset(AnomalibDataset, ABC):
-    """Base depth anomalib dataset class.
+    """Base depth anomalib data class.
 
     This class extends ``AnomalibDataset`` to handle RGB-D data for anomaly
     detection tasks. It supports both classification and segmentation tasks.
@@ -35,8 +35,8 @@ class AnomalibDepthDataset(AnomalibDataset, ABC):
 
     Example:
         >>> from anomalib.data.datasets import AnomalibDepthDataset
-        >>> dataset = AnomalibDepthDataset(transform=None)
-        >>> item = dataset[0]
+        >>> data = AnomalibDepthDataset(transform=None)
+        >>> item = data[0]
         >>> item.image.shape
         torch.Size([3, H, W])
         >>> item.depth_map.shape
@@ -49,7 +49,7 @@ class AnomalibDepthDataset(AnomalibDataset, ABC):
         self.augmentations = augmentations
 
     def __getitem__(self, index: int) -> DepthItem:
-        """Get dataset item for the given index.
+        """Get data item for the given index.
 
         Args:
             index (int): Index of the item to retrieve.

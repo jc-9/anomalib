@@ -3,19 +3,19 @@
 
 """Base Torch Video Dataset.
 
-This module implements the base video dataset class for anomaly detection tasks that
-use video data. The dataset is designed to work with video clips and supports both
+This module implements the base video data class for anomaly detection tasks that
+use video data. The data is designed to work with video clips and supports both
 classification and segmentation tasks.
 
 Example:
     >>> from anomalib.data.datasets import AnomalibVideoDataset
-    >>> dataset = AnomalibVideoDataset(
+    >>> data = AnomalibVideoDataset(
     ...     clip_length_in_frames=8,
     ...     frames_between_clips=1,
     ...     transform=None,
     ...     target_frame="last"
     ... )
-    >>> item = dataset[0]
+    >>> item = data[0]
     >>> item.image.shape
     torch.Size([C, H, W])
 """
@@ -56,7 +56,7 @@ class VideoTargetFrame(str, Enum):
 
 
 class AnomalibVideoDataset(AnomalibDataset, ABC):
-    """Base video anomalib dataset class.
+    """Base video anomalib data class.
 
     This class extends ``AnomalibDataset`` to handle video data for anomaly
     detection tasks. It supports both classification and segmentation tasks.
@@ -73,13 +73,13 @@ class AnomalibVideoDataset(AnomalibDataset, ABC):
 
     Example:
         >>> from torchvision.transforms.v2 import Resize
-        >>> dataset = AnomalibVideoDataset(
+        >>> data = AnomalibVideoDataset(
         ...     clip_length_in_frames=8,
         ...     frames_between_clips=1,
         ...     transform=Resize((256, 256)),
         ...     target_frame="last"
         ... )
-        >>> item = dataset[0]
+        >>> item = data[0]
         >>> item.image.shape
         torch.Size([C, H, W])
     """
@@ -103,10 +103,10 @@ class AnomalibVideoDataset(AnomalibDataset, ABC):
         self.target_frame = target_frame
 
     def __len__(self) -> int:
-        """Get length of the dataset.
+        """Get length of the data.
 
         Returns:
-            int: Number of clips in the dataset.
+            int: Number of clips in the data.
 
         Raises:
             TypeError: If ``self.indexer`` is not an instance of ``ClipsIndexer``.
@@ -121,7 +121,7 @@ class AnomalibVideoDataset(AnomalibDataset, ABC):
         """Get the samples dataframe.
 
         Returns:
-            DataFrame: DataFrame containing dataset samples.
+            DataFrame: DataFrame containing data samples.
         """
         return super().samples
 
@@ -189,7 +189,7 @@ class AnomalibVideoDataset(AnomalibDataset, ABC):
         return item
 
     def __getitem__(self, index: int) -> VideoItem:
-        """Get the dataset item for the index.
+        """Get the data item for the index.
 
         Args:
             index (int): Index of the item to be returned.

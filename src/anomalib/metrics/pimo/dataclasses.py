@@ -81,7 +81,7 @@ class PIMOResult:
         """Get number of images.
 
         Returns:
-            Number of images in the dataset.
+            Number of images in the data.
         """
         return self.per_image_tprs.shape[0]
 
@@ -199,7 +199,7 @@ class AUPIMOResult:
         """Get number of images.
 
         Returns:
-            Number of images in dataset.
+            Number of images in data.
         """
         return self.aupimos.shape[0]
 

@@ -5,11 +5,11 @@
 
 Description:
     This script contains PyTorch Dataset, Dataloader and PyTorch Lightning
-    DataModule for the MVTec LOCO AD dataset. If the dataset is not on the file system,
-    the script downloads and extracts the dataset and create PyTorch data objects.
+    DataModule for the MVTec LOCO AD data. If the data is not on the file system,
+    the script downloads and extracts the data and create PyTorch data objects.
 
 License:
-    MVTec LOCO AD dataset is released under the Creative Commons
+    MVTec LOCO AD data is released under the Creative Commons
     Attribution-NonCommercial-ShareAlike 4.0 International License
     (CC BY-NC-SA 4.0)(https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
@@ -62,13 +62,13 @@ CATEGORIES = (
 
 
 class MVTecLOCODataset(AnomalibDataset):
-    """MVTec LOCO dataset class.
+    """MVTec LOCO data class.
 
-    Dataset class for loading and processing MVTec LOCO AD dataset images. Supports
+    Dataset class for loading and processing MVTec LOCO AD data images. Supports
     classification, detection and segmentation tasks.
 
     Args:
-        root (Path | str): Path to root directory containing the dataset.
+        root (Path | str): Path to root directory containing the data.
             Defaults to ``"./datasets/MVTec_LOCO"``.
         category (str): Category name, must be one of ``CATEGORIES``.
             Defaults to ``"breakfast_box"``.
@@ -79,7 +79,7 @@ class MVTecLOCODataset(AnomalibDataset):
 
     Example:
         >>> from anomalib.data.datasets import MVTecLocoDataset
-        >>> dataset = MVTecLocoDataset(
+        >>> data = MVTecLocoDataset(
         ...     root="./datasets/MVTec_LOCO",
         ...     category="breakfast_box",
         ...     split="train"
@@ -87,21 +87,21 @@ class MVTecLOCODataset(AnomalibDataset):
 
         For classification tasks, each sample contains:
 
-        >>> sample = dataset[0]
+        >>> sample = data[0]
         >>> list(sample.keys())
         ['image_path', 'label', 'image']
 
         For segmentation tasks, samples also include mask paths and masks:
 
-        >>> dataset.task = "segmentation"
-        >>> sample = dataset[0]
+        >>> data.task = "segmentation"
+        >>> sample = data[0]
         >>> list(sample.keys())
         ['image_path', 'label', 'image', 'mask_path', 'mask']
 
         For detection tasks, samples include boxes:
 
-        >>> dataset.task = "detection"
-        >>> sample = dataset[0]
+        >>> data.task = "detection"
+        >>> sample = data[0]
         >>> list(sample.keys())
         ['image_path', 'label', 'image', 'mask_path', 'mask', 'boxes']
 
@@ -131,13 +131,13 @@ class MVTecLOCODataset(AnomalibDataset):
         )
 
     def __getitem__(self, index: int) -> ImageItem:
-        """Get a dataset item.
+        """Get a data item.
 
         Args:
             index (int): Index of the item to get.
 
         Returns:
-            ImageItem: The dataset item.
+            ImageItem: The data item.
         """
         image_path = self.samples.iloc[index].image_path
         mask_path = self.samples.iloc[index].mask_path
@@ -184,8 +184,8 @@ def make_dataset(
     """Create MVTec LOCO AD samples by parsing the original MVTec LOCO AD data file structure.
 
     The files are expected to follow the structure:
-        path/to/dataset/split/category/image_filename.png
-        path/to/dataset/ground_truth/category/image_filename/000.png
+        path/to/data/split/category/image_filename.png
+        path/to/data/ground_truth/category/image_filename/000.png
 
     where there can be multiple ground-truth masks for the corresponding anomalous images.
 
@@ -198,14 +198,14 @@ def make_dataset(
     +---+---------------+-------+---------+-------------------------+-----------------------------+-------------+
 
     Args:
-        root (str | Path): Path to dataset
+        root (str | Path): Path to data
         split (str | Split | None): Dataset split (ie., either train or test).
             Defaults to ``None``.
-        extensions (Sequence[str]): List of file extensions to be included in the dataset.
+        extensions (Sequence[str]): List of file extensions to be included in the data.
             Defaults to ``None``.
 
     Returns:
-        DataFrame: an output dataframe containing the samples of the dataset.
+        DataFrame: an output dataframe containing the samples of the data.
 
     Examples:
         The following example shows how to get test samples from MVTec LOCO AD pushpins category:
@@ -287,7 +287,7 @@ def make_dataset(
             msg = (
                 "Mismatch between anomalous images and ground truth masks. "
                 "Make sure the parent folder of the mask files in 'ground_truth' folder "
-                "follows the same naming convention as the anomalous images in the dataset "
+                "follows the same naming convention as the anomalous images in the data "
                 "(e.g., image: '005.png', mask: '005/000.png')."
             )
             raise MisMatchError(msg)
